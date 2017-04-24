@@ -1,5 +1,4 @@
 NAME=libftprintf.a
-TEMPNAME=$(OBJSDIR)/$(NAME)
 
 CFLAGS=-Wall -Wextra -Werror
 
@@ -9,25 +8,32 @@ HEADERSDIR = includes
 LIBFTHEADERSDIR=libft/includes
 INCLUDES=-I$(HEADERSDIR) -I$(LIBFTHEADERSDIR)
 LIBFT=libft/libft.a
+LIBFTOBJSDIR=$(OBJSDIR)/libft
 
 SRCS= ft_printf.c
 
 OBJS := $(SRCS:%.c=$(OBJSDIR)/%.o)
+LIBFTOBJS=$(LIBFTOBJSDIR)/*.o
 
 all: $(NAME)
 
 $(OBJSDIR):
 	mkdir -p $(OBJSDIR)
 
+$(LIBFTOBJSDIR): $(OBJSDIR)
+	mkdir -p $(LIBFTOBJSDIR)
+
 $(OBJS): $(OBJSDIR)/%.o: $(SRCSDIR)/%.c
 	gcc $(CFLAGS) -c $< -o $@ $(INCLUDES)
 
-makelibft:
+$(LIBFTOBJS): $(LIBFTOBJSDIR)
+	rm -f $(LIBFTOBJS)
 	make -C libft
+	cp $(LIBFT) $(LIBFTOBJSDIR)/libft.a
+	cd $(LIBFTOBJSDIR) && ar -x libft.a
 
-$(NAME): $(OBJSDIR) $(OBJS) makelibft
-	ar rcs $(TEMPNAME) $(OBJS)
-	libtool -static -o $(NAME) $(TEMPNAME) $(LIBFT)
+$(NAME): $(OBJSDIR) $(OBJS) $(LIBFTOBJS)
+	ar rcs $(NAME) $(OBJS) $(LIBFTOBJS)
 
 clean:
 	rm -rf $(OBJSDIR)
