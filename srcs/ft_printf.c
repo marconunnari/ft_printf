@@ -12,61 +12,118 @@
 
 #include "libftprintf.h"
 
-typedef struct		s_conversion
+typedef struct	s_placeholder
 {
-	char		c;
-	int		(*f)(va_list);
-}			t_conversion;
+	char		*flags;
+	char		*width;
+	char		*precision;
+	char		*length;
+	char		*type;
+}		t_placeholder;
 
-int		ft_convertstring(va_list ap)
+char	*g_flags[6] = {"#", "0", "-", "+", " ", NULL};
+char	*g_lengths[7] = {"hh", "h", "l", "ll", "j","z", NULL};
+char	*g_types[15] = {"s","S","p","d","D","i","o","O","u","U","x","X","c","C", NULL};
+
+int		process_placeholder(t_placeholder ph, va_list ap)
 {
-	char	*s;
-	
-	s = va_arg(ap, char *);
-	ft_putstr((char*)s);
-	return (ft_strlen((char*)s));
 }
 
-t_conversion arr[1] =
+char		*contains(char **arr, char *s)
 {
-	{'s', &ft_convertstring}
-};
+	int	i;
+	char	*strsub;
 
+	i = 0;
+	while (arr[i])
+	{
+		strsub = ft_strsub(s, 0, ft_strlen(arr[i]));
+		if (ft_strequ(arr[i], strsub))
+			return (arr[i]);
+		i++;
+	}
+	return (NULL);
+}
 
-int			process(const char *restrict format, va_list ap)
+t_placeholder	init_placeholder()
+{
+	t_placeholder	res;
+
+	res.flags = ft_strnew(0);
+	res.width = ft_strnew(0);
+	res.precision = ft_strnew(0);
+	res.length = ft_strnew(0);
+	res.type = ft_strnew(0);
+	return (res);
+}
+
+t_placheholder	create_placeholder(const char **restrict format)
+{
+	char	*s;
+	t_placeholder ph;
+
+	ph = init_placeholder();
+	while(**format)
+	{
+		while ((s = contains(g_flags, *format)))
+		{
+			ph.flags = ft_strmerge(ph.flags, s);
+			*format += 1;
+		}
+		while (ft_isdigit(**format))
+		{
+			ph.width = ft_strappend(ph.width, **format);
+			*format += 1;
+		}
+		if (**format == '.')
+		{
+			while(ft_isdigit(**format))
+			{
+				ph.precision = ft_strappend(ph.precision, **format);
+				*format += 1;
+			}
+		}
+		while ((s = contains(g_lengths, *format)))
+		{
+			ph.length = ft_strmerge(ph.length, s);
+			*format += 1;
+		}
+		if ((s = contains(g_lengths, *format)))
+		{
+			ph.type = s;
+			*format += 1;
+		}
+		else
+			exit(-1);
+	}
+}
+
+int		print(const char *restrict format, va_list ap)
 {
 	int		res;
-	int		i;
+	t_placeholder	curr_ph;
 
-	res = 0;
-	while (*format)
+	while(*format)
 	{
 		if (*format == '%')
 		{
-			format++;
-			i = 0;
-			while(i < 1)
-			{
-				if (arr[i].c == *format)
-					res += arr[i].f(ap);
-				i++;
-			}
+			curr_ph = create_placeholder(&format);
+			res += process_placeholder(curr_ph, ap);
 		}
-		else
-			ft_putchar(*format);
+		ft_putchar(*format);
+		res++
 		format++;
-		res++;
 	}
 	return (res);
 }
 
-int			ft_printf(const char *restrict format, ...)
+int		ft_printf(const char *restrict format, ...)
 {
 	va_list		ap;
 	int		res;
 
 	va_start(ap, format);
-	res = process(format, ap);
+	res = print(format, ap);
 	va_end(ap);
 	return (res);
 }
