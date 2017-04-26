@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   process_placeholder.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnunnari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/24 16:46:10 by mnunnari          #+#    #+#             */
-/*   Updated: 2017/04/26 19:06:28 by mnunnari         ###   ########.fr       */
+/*   Created: 2017/04/26 18:20:13 by mnunnari          #+#    #+#             */
+/*   Updated: 2017/04/26 18:20:15 by mnunnari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int				ft_printf(const char *format, ...)
+int		process_placeholder(t_placeholder *ph, va_list ap)
 {
-	va_list		ap;
-	int			res;
+	char	*s;
 
-	va_start(ap, format);
-	res = process(format, ap);
-	va_end(ap);
-	return (res);
+	if(ft_strequ(ph->type, "s"))
+	{
+		s = va_arg(ap, char*);
+		free(ph);
+		return (ft_strlen(s));
+	}
+	free(ph);
+	return (0);
 }

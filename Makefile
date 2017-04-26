@@ -10,7 +10,11 @@ INCLUDES=-I$(HEADERSDIR) -I$(LIBFTHEADERSDIR)
 LIBFT=libft/libft.a
 LIBFTOBJSDIR=$(OBJSDIR)/libft
 
-SRCS= ft_printf.c
+SRCS= ft_printf.c \
+	init_placeholder.c \
+	create_placeholder.c \
+	process_placeholder.c \
+	process.c
 
 OBJS := $(SRCS:%.c=$(OBJSDIR)/%.o)
 LIBFTOBJS=$(LIBFTOBJSDIR)/*.o
