@@ -12,9 +12,9 @@
 
 #include "libftprintf.h"
 
-char			*g_flags[6] = {"#", "0", "-", "+", " ", NULL};
-char			*g_lengths[7] = {"hh", "h", "l", "ll", "j", "z", NULL};
-char			*g_types[15] = {"s", "S", "p", "d", "D", "i",
+char		*g_flags[6] = {"#", "0", "-", "+", " ", NULL};
+char		*g_lengths[7] = {"hh", "h", "l", "ll", "j", "z", NULL};
+char		*g_types[15] = {"s", "S", "p", "d", "D", "i",
 	"o", "O", "u", "U", "x", "X", "c", "C", NULL};
 
 t_placeholder	*create_placeholder(const char **format)
@@ -25,42 +25,37 @@ t_placeholder	*create_placeholder(const char **format)
 
 	formatptr = *format + 1;
 	ph = init_placeholder();
-	while(**format)
+	while ((s = ft_contstr(g_flags, formatptr)))
 	{
-		if ((s = ft_contstr(g_types, *format)))
-		{
-			ph->type = ft_strjoin(ph->type, s);
-			*format += 1;
-		}
-		else
-			exit(-1);
+		ph->flags = ft_strmerge(ph->flags, s);
+		formatptr++;
 	}
+	while (ft_isdigit(*formatptr))
+	{
+		ph->width = ft_strappend(ph->width, *formatptr);
+		formatptr++;
+	}
+	if (**format == '.')
+	{
+		formatptr++;
+		while(ft_isdigit(*formatptr))
+		{
+			ph->precision = ft_strappend(ph->precision, *formatptr);
+			formatptr++;
+		}
+	}
+	while ((s = ft_contstr(g_lengths, formatptr)))
+	{
+		ph->length = ft_strmerge(ph->length, s);
+		formatptr++;
+	}
+	if ((s = ft_contstr(g_types, formatptr)))
+	{
+		ph->type = ft_strmerge(ph->type, ft_strdup(s));
+		formatptr++;
+	}
+	else
+		exit(-1);
+	*format = *format + (formatptr - *format);
 	return (ph);
 }
-
-		/*
-		while ((s = contains(g_flags, *format)))
-		{
-			ph.flags = ft_strmerge(ph.flags, s);
-			*format += 1;
-		}
-		while (ft_isdigit(**format))
-		{
-			ph.width = ft_strappend(ph.width, **format);
-			*format += 1;
-		}
-		if (**format == '.')
-		{
-			while(ft_isdigit(**format))
-			{
-				ph.precision = ft_strappend(ph.precision, **format);
-				*format += 1;
-			}
-		}
-		while ((s = contains(g_lengths, *format)))
-		{
-			ph.length = ft_strmerge(ph.length, s);
-			*format += 1;
-		}
-		*/
-

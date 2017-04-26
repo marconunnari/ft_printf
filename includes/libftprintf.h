@@ -27,6 +27,7 @@ typedef struct	s_placeholder
 
 int				ft_printf(const char *restrict format, ...);
 t_placeholder	*init_placeholder();
+void			free_placeholder(t_placeholder	*ph);
 int				process(const char *format, va_list ap);
 t_placeholder	*create_placeholder(const char **format);
 int				process_placeholder(t_placeholder *ph, va_list ap);

@@ -12,6 +12,7 @@ LIBFTOBJSDIR=$(OBJSDIR)/libft
 
 SRCS= ft_printf.c \
 	init_placeholder.c \
+	free_placeholder.c \
 	create_placeholder.c \
 	process_placeholder.c \
 	process.c
