@@ -25,11 +25,21 @@ char	*g_flags[6] = {"#", "0", "-", "+", " ", NULL};
 char	*g_lengths[7] = {"hh", "h", "l", "ll", "j","z", NULL};
 char	*g_types[15] = {"s","S","p","d","D","i","o","O","u","U","x","X","c","C", NULL};
 
-int		process_placeholder(t_placeholder ph, va_list ap)
+int		process_placeholder(t_placeholder *ph, va_list ap)
 {
+	char	*s;
+
+	if(ft_strequ(ph->type, "s"))
+	{
+		s = va_arg(ap, char*);
+		free(ph);
+		return (ft_strlen(s));
+	}
+	free(ph);
+	return (0);
 }
 
-char		*contains(char **arr, char *s)
+char		*contains(char **arr, const char *s)
 {
 	int	i;
 	char	*strsub;
@@ -39,32 +49,39 @@ char		*contains(char **arr, char *s)
 	{
 		strsub = ft_strsub(s, 0, ft_strlen(arr[i]));
 		if (ft_strequ(arr[i], strsub))
+		{
+			free(strsub);
 			return (arr[i]);
+		}
+		free(strsub);
 		i++;
 	}
 	return (NULL);
 }
 
-t_placeholder	init_placeholder()
+t_placeholder	*init_placeholder()
 {
-	t_placeholder	res;
+	t_placeholder	*res;
 
-	res.flags = ft_strnew(0);
-	res.width = ft_strnew(0);
-	res.precision = ft_strnew(0);
-	res.length = ft_strnew(0);
-	res.type = ft_strnew(0);
+	res = (t_placeholder*)malloc(sizeof(t_placeholder));
+	res->flags = ft_strnew(0);
+	res->width = ft_strnew(0);
+	res->precision = ft_strnew(0);
+	res->length = ft_strnew(0);
+	res->type = ft_strnew(0);
 	return (res);
 }
 
-t_placheholder	create_placeholder(const char **restrict format)
+t_placeholder	*create_placeholder(const char **format)
 {
-	char	*s;
-	t_placeholder ph;
+	char		*s;
+	t_placeholder	*ph;
 
+	*format += 1;
 	ph = init_placeholder();
 	while(**format)
 	{
+		/*
 		while ((s = contains(g_flags, *format)))
 		{
 			ph.flags = ft_strmerge(ph.flags, s);
@@ -88,20 +105,22 @@ t_placheholder	create_placeholder(const char **restrict format)
 			ph.length = ft_strmerge(ph.length, s);
 			*format += 1;
 		}
-		if ((s = contains(g_lengths, *format)))
+		*/
+		if ((s = contains(g_types, *format)))
 		{
-			ph.type = s;
+			ph->type = ft_strjoin(ph->type, s);
 			*format += 1;
 		}
 		else
 			exit(-1);
 	}
+	return (ph);
 }
 
-int		print(const char *restrict format, va_list ap)
+int		print(const char *format, va_list ap)
 {
 	int		res;
-	t_placeholder	curr_ph;
+	t_placeholder	*curr_ph;
 
 	while(*format)
 	{
@@ -111,13 +130,13 @@ int		print(const char *restrict format, va_list ap)
 			res += process_placeholder(curr_ph, ap);
 		}
 		ft_putchar(*format);
-		res++
+		res++;
 		format++;
 	}
 	return (res);
 }
 
-int		ft_printf(const char *restrict format, ...)
+int		ft_printf(const char *format, ...)
 {
 	va_list		ap;
 	int		res;
