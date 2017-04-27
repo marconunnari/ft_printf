@@ -6,11 +6,23 @@
 /*   By: mnunnari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/26 18:20:13 by mnunnari          #+#    #+#             */
-/*   Updated: 2017/04/27 13:08:28 by mnunnari         ###   ########.fr       */
+/*   Updated: 2017/04/27 18:26:49 by mnunnari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
+
+int					printuint(t_placeholder *ph, va_list ap)
+{
+	unsigned int		i;
+	char				*str;
+
+	(void)ph;
+	i = va_arg(ap, unsigned int);
+	str = ft_ulltoa_base(i, 10);
+	ft_putstr(str);
+	return (ft_strlen(str));
+}
 
 int					printint(t_placeholder *ph, va_list ap)
 {
@@ -19,9 +31,19 @@ int					printint(t_placeholder *ph, va_list ap)
 
 	(void)ph;
 	i = va_arg(ap, int);
-	str = ft_itoa(i);
+	str = ft_lltoa(i);
 	ft_putstr(str);
 	return (ft_strlen(str));
+}
+
+int					printchr(t_placeholder *ph, va_list ap)
+{
+	char	chr;
+
+	(void)ph;
+	chr = va_arg(ap, int);
+	ft_putchar(chr);
+	return (1);
 }
 
 int					printstr(t_placeholder *ph, va_list ap)
@@ -42,11 +64,13 @@ typedef struct		s_typefunct
 	t_funct			f;
 }					t_typefunct;
 
-static t_typefunct			g_typefuncts[4] =
+static t_typefunct			g_typefuncts[6] =
 {
 	{"s", &printstr},
+	{"c", &printchr},
 	{"d", &printint},
 	{"i", &printint},
+	{"u", &printuint},
 	{NULL, NULL}
 };
 
