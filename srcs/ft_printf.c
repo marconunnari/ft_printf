@@ -15,10 +15,13 @@
 int				ft_printf(const char *format, ...)
 {
 	va_list		ap;
-	int			res;
+	char		*str;
+	int		res;
 
 	va_start(ap, format);
-	res = process(format, ap);
+	res = ft_vasprintf(&str, format, ap);
+	ft_putstr(str);
+	ft_strdel(&str);
 	va_end(ap);
 	return (res);
 }

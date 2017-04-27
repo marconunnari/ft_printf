@@ -12,51 +12,7 @@
 
 #include "libftprintf.h"
 
-int					printuint(t_placeholder *ph, va_list ap)
-{
-	unsigned int		i;
-	char				*str;
-
-	(void)ph;
-	i = va_arg(ap, unsigned int);
-	str = ft_ulltoa_base(i, 10);
-	ft_putstr(str);
-	return (ft_strlen(str));
-}
-
-int					printint(t_placeholder *ph, va_list ap)
-{
-	int		i;
-	char	*str;
-
-	(void)ph;
-	i = va_arg(ap, int);
-	str = ft_lltoa(i);
-	ft_putstr(str);
-	return (ft_strlen(str));
-}
-
-int					printchr(t_placeholder *ph, va_list ap)
-{
-	char	chr;
-
-	(void)ph;
-	chr = va_arg(ap, int);
-	ft_putchar(chr);
-	return (1);
-}
-
-int					printstr(t_placeholder *ph, va_list ap)
-{
-	char	*str;
-
-	(void)ph;
-	str = va_arg(ap, char*);
-	ft_putstr(str);
-	return (ft_strlen(str));
-}
-
-typedef int (*t_funct)(t_placeholder*, va_list);
+typedef char *(*t_funct)(t_placeholder*, va_list);
 
 typedef struct		s_typefunct
 {
@@ -87,9 +43,9 @@ t_funct		get_funct(char *type)
 	return (NULL);
 }
 
-int					process_placeholder(t_placeholder *ph, va_list ap)
+char					*process_placeholder(t_placeholder *ph, va_list ap)
 {
-	int		res;
+	char		*res;
 	t_funct	f;
 
 	f = get_funct(ph->type);

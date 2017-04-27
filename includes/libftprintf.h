@@ -26,10 +26,14 @@ typedef struct	s_placeholder
 }				t_placeholder;
 
 int				ft_printf(const char *restrict format, ...);
-t_placeholder	*init_placeholder();
-void			free_placeholder(t_placeholder	*ph);
-int				process(const char *format, va_list ap);
+int			ft_vasprintf(char **str, const char *format, va_list ap);
 t_placeholder	*create_placeholder(const char **format);
-int				process_placeholder(t_placeholder *ph, va_list ap);
+t_placeholder	*init_placeholder();
+char				*process_placeholder(t_placeholder *ph, va_list ap);
+void			free_placeholder(t_placeholder	*ph);
+char					*printuint(t_placeholder *ph, va_list ap);
+char					*printint(t_placeholder *ph, va_list ap);
+char					*printchr(t_placeholder *ph, va_list ap);
+char					*printstr(t_placeholder *ph, va_list ap);
 
 #endif
