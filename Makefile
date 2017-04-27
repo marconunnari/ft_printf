@@ -11,6 +11,7 @@ LIBFT=libft/libft.a
 LIBFTOBJSDIR=$(OBJSDIR)/libft
 
 SRCS= ft_printf.c \
+	ft_vasprintf.c \
 	init_placeholder.c \
 	free_placeholder.c \
 	create_placeholder.c \

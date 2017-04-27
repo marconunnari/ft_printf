@@ -6,7 +6,7 @@
 /*   By: mnunnari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/24 16:46:32 by mnunnari          #+#    #+#             */
-/*   Updated: 2017/04/26 19:05:37 by mnunnari         ###   ########.fr       */
+/*   Updated: 2017/04/27 19:38:39 by mnunnari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,12 @@ typedef struct	s_placeholder
 	char		*type;
 }				t_placeholder;
 
+int		ft_vasprintf(char **ret, const char *format, va_list ap);
 int				ft_printf(const char *restrict format, ...);
 t_placeholder	*init_placeholder();
 void			free_placeholder(t_placeholder	*ph);
-int				process(const char *format, va_list ap);
+void			process(char **ret, const char *format, va_list ap);
 t_placeholder	*create_placeholder(const char **format);
-int				process_placeholder(t_placeholder *ph, va_list ap);
+char			*process_placeholder(t_placeholder *ph, va_list ap);
 
 #endif
