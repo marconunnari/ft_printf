@@ -6,13 +6,13 @@
 /*   By: mnunnari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/26 18:20:13 by mnunnari          #+#    #+#             */
-/*   Updated: 2017/04/27 19:42:07 by mnunnari         ###   ########.fr       */
+/*   Updated: 2017/04/27 18:26:49 by mnunnari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-char				*printuint(t_placeholder *ph, va_list ap)
+int					printuint(t_placeholder *ph, va_list ap)
 {
 	unsigned int		i;
 	char				*str;
@@ -20,10 +20,11 @@ char				*printuint(t_placeholder *ph, va_list ap)
 	(void)ph;
 	i = va_arg(ap, unsigned int);
 	str = ft_ulltoa_base(i, 10);
-	return (ft_strdup(str));
+	ft_putstr(str);
+	return (ft_strlen(str));
 }
 
-char				*printint(t_placeholder *ph, va_list ap)
+int					printint(t_placeholder *ph, va_list ap)
 {
 	int		i;
 	char	*str;
@@ -31,31 +32,31 @@ char				*printint(t_placeholder *ph, va_list ap)
 	(void)ph;
 	i = va_arg(ap, int);
 	str = ft_lltoa(i);
-	return (ft_strdup(str));
+	ft_putstr(str);
+	return (ft_strlen(str));
 }
 
-char					*printchr(t_placeholder *ph, va_list ap)
+int					printchr(t_placeholder *ph, va_list ap)
 {
 	char	chr;
-	char	*str;
 
 	(void)ph;
 	chr = va_arg(ap, int);
-	str = ft_strnew(1);
-	str[0] = chr;
-	return (ft_strdup(str));
+	ft_putchar(chr);
+	return (1);
 }
 
-char					*printstr(t_placeholder *ph, va_list ap)
+int					printstr(t_placeholder *ph, va_list ap)
 {
 	char	*str;
 
 	(void)ph;
 	str = va_arg(ap, char*);
-	return (ft_strdup(str));
+	ft_putstr(str);
+	return (ft_strlen(str));
 }
 
-typedef char *(*t_funct)(t_placeholder*, va_list);
+typedef int (*t_funct)(t_placeholder*, va_list);
 
 typedef struct		s_typefunct
 {
@@ -86,9 +87,9 @@ t_funct		get_funct(char *type)
 	return (NULL);
 }
 
-char				*process_placeholder(t_placeholder *ph, va_list ap)
+int					process_placeholder(t_placeholder *ph, va_list ap)
 {
-	char	*res;
+	int		res;
 	t_funct	f;
 
 	f = get_funct(ph->type);
