@@ -6,19 +6,20 @@
 /*   By: mnunnari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/26 18:21:25 by mnunnari          #+#    #+#             */
-/*   Updated: 2017/04/26 19:06:41 by mnunnari         ###   ########.fr       */
+/*   Updated: 2017/04/27 10:47:20 by mnunnari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-char		*g_flags[6] = {"#", "0", "-", "+", " ", NULL};
-char		*g_lengths[7] = {"hh", "h", "l", "ll", "j", "z", NULL};
-char		*g_types[15] = {"s", "S", "p", "d", "D", "i",
+static char		*g_flags[6] = {"#", "0", "-", "+", " ", NULL};
+static char		*g_lengths[7] = {"hh", "h", "l", "ll", "j", "z", NULL};
+static char		*g_types[15] = {"s", "S", "p", "d", "D", "i",
 	"o", "O", "u", "U", "x", "X", "c", "C", NULL};
 
 t_placeholder	*create_placeholder(const char **format)
 {
+
 	char			*s;
 	const char		*formatptr;
 	t_placeholder	*ph;
