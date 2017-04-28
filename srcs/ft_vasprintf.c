@@ -3,6 +3,7 @@
 int			ft_vasprintf(char **str, const char *format, va_list ap)
 {
 	char		*res;
+	char		*tmp;
 	t_placeholder	*curr_ph;
 
 	res = ft_strnew(0);
@@ -11,7 +12,9 @@ int			ft_vasprintf(char **str, const char *format, va_list ap)
 		if (*format == '%')
 		{
 			curr_ph = create_placeholder(&format);
-			res = ft_strmerge(res, process_placeholder(curr_ph, ap));
+			tmp = process_placeholder(curr_ph, ap);
+			if (tmp)
+				res = ft_strmerge(res, tmp);
 		}
 		res = ft_strappend(res, *format);
 		format++;

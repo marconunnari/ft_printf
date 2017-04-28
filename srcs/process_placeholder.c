@@ -49,6 +49,7 @@ char					*process_placeholder(t_placeholder *ph, va_list ap)
 	t_funct	f;
 
 	f = get_funct(ph->type);
+	IFRETURN(!f, NULL);
 	res = f(ph, ap);
 	free_placeholder(ph);
 	return (res);
