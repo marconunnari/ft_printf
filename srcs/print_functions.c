@@ -58,11 +58,15 @@ char					*printchr(t_placeholder *ph, va_list ap)
 char					*printstr(t_placeholder *ph, va_list ap)
 {
 	char	*str;
+	unsigned int		precision;
 
-	(void)ph;
 	str = va_arg(ap, char*);
 	if (str == NULL)
 		str = "(null)";
+	ft_putstr("a");
+	precision = ft_atoi(ph->precision);
+	if (ft_strlen(ph->precision) != 0 && precision < ft_strlen(str))
+		return (ft_strsub(str, 0, precision));
 	return (ft_strdup(str));
 }
 
