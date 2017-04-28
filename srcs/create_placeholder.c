@@ -14,8 +14,8 @@
 
 static char		*g_flags[6] = {"#", "0", "-", "+", " ", NULL};
 static char		*g_lengths[7] = {"hh", "h", "l", "ll", "j", "z", NULL};
-static char		*g_types[15] = {"s", "S", "p", "d", "D", "i",
-	"o", "O", "u", "U", "x", "X", "c", "C", NULL};
+static char		*g_types[16] = {"s", "S", "p", "d", "D", "i",
+	"o", "O", "u", "U", "x", "X", "c", "C", "%", NULL};
 
 t_placeholder	*create_placeholder(const char **format)
 {
@@ -28,7 +28,7 @@ t_placeholder	*create_placeholder(const char **format)
 	ph = init_placeholder();
 	while ((s = ft_contstr(g_flags, formatptr)))
 	{
-		ph->flags = ft_strmerge(ph->flags, s);
+		REASSIGN(ph->flags, ft_strjoin(ph->flags, s));
 		formatptr++;
 	}
 	while (ft_isdigit(*formatptr))

@@ -20,7 +20,7 @@ typedef struct		s_typefunct
 	t_funct			f;
 }					t_typefunct;
 
-static t_typefunct			g_typefuncts[10] =
+static t_typefunct			g_typefuncts[11] =
 {
 	{"s", &printstr},
 	{"c", &printchr},
@@ -31,6 +31,7 @@ static t_typefunct			g_typefuncts[10] =
 	{"X", &printuint},
 	{"o", &printuint},
 	{"p", &printuint},
+	{"%", &printpercent},
 	{NULL, NULL}
 };
 

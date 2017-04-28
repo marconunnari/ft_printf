@@ -27,6 +27,7 @@ typedef struct	s_placeholder
 
 int				ft_printf(const char *restrict format, ...);
 int			ft_vasprintf(char **str, const char *format, va_list ap);
+int				ft_asprintf(char **str, const char *format, ...);
 t_placeholder	*create_placeholder(const char **format);
 t_placeholder	*init_placeholder();
 char				*process_placeholder(t_placeholder *ph, va_list ap);
@@ -35,5 +36,6 @@ char					*printuint(t_placeholder *ph, va_list ap);
 char					*printint(t_placeholder *ph, va_list ap);
 char					*printchr(t_placeholder *ph, va_list ap);
 char					*printstr(t_placeholder *ph, va_list ap);
+char					*printpercent(t_placeholder *ph, va_list ap);
 
 #endif

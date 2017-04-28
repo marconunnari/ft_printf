@@ -15,7 +15,6 @@ SRCS= ft_printf.c \
 	free_placeholder.c \
 	create_placeholder.c \
 	process_placeholder.c \
-	ft_vasprintf.c \
 	print_functions.c \
 
 OBJS := $(SRCS:%.c=$(OBJSDIR)/%.o)

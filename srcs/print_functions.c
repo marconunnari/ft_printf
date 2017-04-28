@@ -15,9 +15,18 @@ char					*printuint(t_placeholder *ph, va_list ap)
 	if (ph->type[0] == 'o')
 		base = 8;
 	str = ft_ulltoa_base(i, base);
-	if (ph->type[0] == 'x' || ph->type[0] == 'X'
-			|| ph->type[0] == 'p')
+	if (ph->type[0] == 'p')
 		REASSIGN(str, ft_strjoin("0x", str));
+	if (ft_strcont(ph->flags,'#'))
+	{
+		if (!ft_strequ(str, "0"))
+		{
+			if (ph->type[0] == 'x' || ph->type[0] == 'X')
+				REASSIGN(str, ft_strjoin("0x", str));
+			if (ph->type[0] == 'o'	)
+				REASSIGN(str, ft_strjoin("0", str));
+		}
+	}
 	if (ph->type[0] == 'X')
 		str = ft_strtoupper(str);
 	return (str);
@@ -53,4 +62,15 @@ char					*printstr(t_placeholder *ph, va_list ap)
 	(void)ph;
 	str = va_arg(ap, char*);
 	return (ft_strdup(str));
+}
+
+char					*printpercent(t_placeholder *ph, va_list ap)
+{
+	char	*str;
+
+	(void)ph;
+	(void)ap;
+	str = ft_strnew(1);
+	str[0] = '%';
+	return (str);
 }
