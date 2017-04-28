@@ -61,6 +61,8 @@ char					*printstr(t_placeholder *ph, va_list ap)
 
 	(void)ph;
 	str = va_arg(ap, char*);
+	if (str == NULL)
+		str = "(null)";
 	return (ft_strdup(str));
 }
 
