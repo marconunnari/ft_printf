@@ -62,8 +62,7 @@ char					*printstr(t_placeholder *ph, va_list ap)
 
 	str = va_arg(ap, char*);
 	if (str == NULL)
-		str = "(null)";
-	ft_putstr("a");
+		return (ft_strdup("(null)"));
 	precision = ft_atoi(ph->precision);
 	if (ft_strlen(ph->precision) != 0 && precision < ft_strlen(str))
 		return (ft_strsub(str, 0, precision));

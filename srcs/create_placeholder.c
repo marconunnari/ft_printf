@@ -36,7 +36,7 @@ t_placeholder	*create_placeholder(const char **format)
 		ph->width = ft_strappend(ph->width, *formatptr);
 		formatptr++;
 	}
-	if (**format == '.')
+	if (*formatptr == '.')
 	{
 		formatptr++;
 		while(ft_isdigit(*formatptr))

@@ -48,6 +48,23 @@ t_funct		get_funct(char *type)
 	return (NULL);
 }
 
+char					*width(char *str, t_placeholder *ph)
+{
+	int		width;
+	int		strlen;
+	char		*fix;
+
+	width = ft_atoi(ph->width);
+	strlen = ft_strlen(str);
+	if (ft_strlen(ph->width) != 0 && width > strlen)
+	{
+		fix = ft_strnew(width - strlen);
+		ft_memset(fix, ' ', width - strlen);
+		str = ft_strmerge(fix, str);
+	}
+	return (str);
+}
+
 char					*process_placeholder(t_placeholder *ph, va_list ap)
 {
 	char		*res;
@@ -56,6 +73,7 @@ char					*process_placeholder(t_placeholder *ph, va_list ap)
 	f = get_funct(ph->type);
 	IFRETURN(!f, NULL);
 	res = f(ph, ap);
+	res = width(res, ph);
 	free_placeholder(ph);
 	return (res);
 }
