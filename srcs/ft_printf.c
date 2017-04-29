@@ -6,7 +6,7 @@
 /*   By: mnunnari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/24 16:46:10 by mnunnari          #+#    #+#             */
-/*   Updated: 2017/04/26 19:06:28 by mnunnari         ###   ########.fr       */
+/*   Updated: 2017/04/29 16:53:17 by mnunnari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,11 @@ int			ft_vasprintf(char **str, const char *format, va_list ap)
 			if (tmp)
 				res = ft_strmerge(res, tmp);
 		}
-		res = ft_strappend(res, *format);
-		format++;
+		else
+		{
+			res = ft_strappend(res, *format);
+			format++;
+		}
 	}
 	*str = res;
 	return (ft_strlen(res));

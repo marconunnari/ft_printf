@@ -6,7 +6,7 @@
 /*   By: mnunnari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/26 18:20:13 by mnunnari          #+#    #+#             */
-/*   Updated: 2017/04/27 18:26:49 by mnunnari         ###   ########.fr       */
+/*   Updated: 2017/04/29 16:59:39 by mnunnari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static t_typefunct			g_typefuncts[11] =
 	{'x', &printuint},
 	{'X', &printuint},
 	{'o', &printuint},
-	{'p', &printuint},
+	{'p', &printptr},
 	{'%', &printpercent},
 	{0, NULL}
 };
@@ -59,9 +59,14 @@ char					*width(char *str, t_placeholder *ph)
 	if (ft_strlen(ph->width) != 0 && width > strlen)
 	{
 		fix = ft_strnew(width - strlen);
-		if (!ft_strcont(ph->flags, '0'))
+		if (ft_strcont(ph->flags, '0'))
+			ft_memset(fix, '0', width - strlen);
+		else
 			ft_memset(fix, ' ', width - strlen);
-		str = ft_strmerge(fix, str);
+		if (ft_strcont(ph->flags, '-'))
+			str = ft_strmerge(str, fix);
+		else
+			str = ft_strmerge(fix, str);
 	}
 	return (str);
 }
@@ -69,11 +74,11 @@ char					*width(char *str, t_placeholder *ph)
 char					*process_placeholder(t_placeholder *ph, va_list ap)
 {
 	char		*res;
-	t_funct	f;
+	t_funct		convert;
 
-	f = get_funct(ph->type);
-	IFRETURN(!f, NULL);
-	res = f(ph, ap);
+	convert = get_funct(ph->type);
+	IFRETURN(!convert, NULL);
+	res = convert(ph, ap);
 	res = width(res, ph);
 	free_placeholder(ph);
 	return (res);

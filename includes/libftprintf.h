@@ -6,7 +6,7 @@
 /*   By: mnunnari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/24 16:46:32 by mnunnari          #+#    #+#             */
-/*   Updated: 2017/04/26 19:05:37 by mnunnari         ###   ########.fr       */
+/*   Updated: 2017/04/29 17:00:57 by mnunnari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ char					*printuint(t_placeholder *ph, va_list ap);
 char					*printint(t_placeholder *ph, va_list ap);
 char					*printchr(t_placeholder *ph, va_list ap);
 char					*printstr(t_placeholder *ph, va_list ap);
+char					*printptr(t_placeholder *ph, va_list ap);
 char					*printpercent(t_placeholder *ph, va_list ap);
 
 #endif

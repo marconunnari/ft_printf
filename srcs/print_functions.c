@@ -1,5 +1,17 @@
 #include "libftprintf.h"
+#include <inttypes.h>
 
+char					*printptr(t_placeholder *ph, va_list ap)
+{
+	intmax_t			i;
+	char				*str;
+
+	(void)ph;
+	i = va_arg(ap, intmax_t);
+	str = ft_ulltoa_base(i, 16);
+	REASSIGN(str, ft_strjoin("0x", str));
+	return (str);
+}
 char					*printuint(t_placeholder *ph, va_list ap)
 {
 	unsigned int		i;
@@ -23,7 +35,7 @@ char					*printuint(t_placeholder *ph, va_list ap)
 		{
 			if (ph->type == 'x' || ph->type == 'X')
 				REASSIGN(str, ft_strjoin("0x", str));
-			if (ph->type == 'o'	)
+			if (ph->type == 'o')
 				REASSIGN(str, ft_strjoin("0", str));
 		}
 	}
@@ -37,9 +49,12 @@ char					*printint(t_placeholder *ph, va_list ap)
 	int		i;
 	char	*str;
 
-	(void)ph;
 	i = va_arg(ap, int);
 	str = ft_lltoa(i);
+	if (ft_strcont(ph->flags, '+') && str[0] != '-')
+		REASSIGN(str, ft_strjoin("+", str));
+	if (ft_strcont(ph->flags, ' ') && str[0] != '-')
+		REASSIGN(str, ft_strjoin(" ", str));
 	return (str);
 }
 
