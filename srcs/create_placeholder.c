@@ -13,7 +13,7 @@
 #include "libftprintf.h"
 
 static char		*g_flags[6] = {"#", "0", "-", "+", " ", NULL};
-static char		*g_lengths[7] = {"hh", "h", "l", "ll", "j", "z", NULL};
+static char		*g_lengths[7] = {"hh", "h", "ll", "l", "j", "z", NULL};
 static char		g_types[16] = {'s', 'S', 'p', 'd', 'D', 'i',
 	'o', 'O', 'u', 'U', 'x', 'X', 'c', 'C', '%', 0};
 
@@ -45,10 +45,10 @@ t_placeholder	*create_placeholder(const char **format)
 			formatptr++;
 		}
 	}
-	while ((s = ft_contstr(g_lengths, formatptr)))
+	if ((s = ft_contstr(g_lengths, formatptr)))
 	{
-		ph->length = ft_strmerge(ph->length, s);
-		formatptr++;
+		REASSIGN(ph->length, ft_strjoin(ph->length, s));
+		formatptr = formatptr + ft_strlen(s);
 	}
 	if (ft_strcont(g_types, *formatptr))
 	{

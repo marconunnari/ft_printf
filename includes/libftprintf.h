@@ -14,7 +14,6 @@
 # define LIBFTPRINTF_H
 
 # include <stdarg.h>
-# include <inttypes.h>
 # include "../libft/includes/libft.h"
 
 typedef struct	s_placeholder
@@ -40,6 +39,7 @@ char					*printint(t_placeholder *ph, va_list ap);
 char					*printuint(t_placeholder *ph, va_list ap);
 char					*printchr(t_placeholder *ph, va_list ap);
 char					*printstr(t_placeholder *ph, va_list ap);
+char					*printwstr(t_placeholder *ph, va_list ap);
 char					*printpercent(t_placeholder *ph, va_list ap);
 
 #endif

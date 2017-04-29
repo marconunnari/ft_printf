@@ -59,7 +59,7 @@ char					*width(char *str, t_placeholder *ph)
 	if (ft_strlen(ph->width) != 0 && width > strlen)
 	{
 		fix = ft_strnew(width - strlen);
-		if (ft_strcont(ph->flags, '0'))
+		if (ft_strcont(ph->flags, '0') && !ft_strcont(ph->flags, '-'))
 			ft_memset(fix, '0', width - strlen);
 		else
 			ft_memset(fix, ' ', width - strlen);

@@ -98,13 +98,32 @@ char					*printchr(t_placeholder *ph, va_list ap)
 
 char					*printstr(t_placeholder *ph, va_list ap)
 {
-	char	*str;
+	char			*str;
 	unsigned int		precision;
 
-	str = va_arg(ap, char*);
+	if (ft_strequ(ph->length, "l"))
+		return (printwstr(ph, ap));
+	else
+		str = va_arg(ap, char*);
 	if (str == NULL)
 		str = "(null)";
 	precision = ft_atoi(ph->precision);
+	if (ft_strlen(ph->precision) != 0 && precision < ft_strlen(str))
+		return (ft_strsub(str, 0, precision));
+	return (ft_strdup(str));
+}
+
+char					*printwstr(t_placeholder *ph, va_list ap)
+{
+	wchar_t			*wstr;
+	char			*str;
+	unsigned int		precision;
+
+	wstr = va_arg(ap, wchar_t*);
+	if (wstr == NULL)
+		wstr = L"(null)";
+	precision = ft_atoi(ph->precision);
+	str = (char*)wstr;
 	if (ft_strlen(ph->precision) != 0 && precision < ft_strlen(str))
 		return (ft_strsub(str, 0, precision));
 	return (ft_strdup(str));
