@@ -16,32 +16,32 @@ typedef char *(*t_funct)(t_placeholder*, va_list);
 
 typedef struct		s_typefunct
 {
-	char			*type;
+	char			type;
 	t_funct			f;
 }					t_typefunct;
 
 static t_typefunct			g_typefuncts[11] =
 {
-	{"s", &printstr},
-	{"c", &printchr},
-	{"d", &printint},
-	{"i", &printint},
-	{"u", &printuint},
-	{"x", &printuint},
-	{"X", &printuint},
-	{"o", &printuint},
-	{"p", &printuint},
-	{"%", &printpercent},
-	{NULL, NULL}
+	{'s', &printstr},
+	{'c', &printchr},
+	{'d', &printint},
+	{'i', &printint},
+	{'u', &printuint},
+	{'x', &printuint},
+	{'X', &printuint},
+	{'o', &printuint},
+	{'p', &printuint},
+	{'%', &printpercent},
+	{0, NULL}
 };
 
-t_funct		get_funct(char *type)
+t_funct		get_funct(char type)
 {
 	int		i = 0;
 
 	while (g_typefuncts[i].type)
 	{
-		if (ft_strequ(g_typefuncts[i].type, type))
+		if (g_typefuncts[i].type == type)
 			return (g_typefuncts[i].f);
 		i++;
 	}
@@ -59,7 +59,8 @@ char					*width(char *str, t_placeholder *ph)
 	if (ft_strlen(ph->width) != 0 && width > strlen)
 	{
 		fix = ft_strnew(width - strlen);
-		ft_memset(fix, ' ', width - strlen);
+		if (!ft_strcont(ph->flags, '0'))
+			ft_memset(fix, ' ', width - strlen);
 		str = ft_strmerge(fix, str);
 	}
 	return (str);

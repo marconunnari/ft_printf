@@ -22,7 +22,7 @@ typedef struct	s_placeholder
 	char		*width;
 	char		*precision;
 	char		*length;
-	char		*type;
+	char		type;
 }				t_placeholder;
 
 int				ft_printf(const char *restrict format, ...);

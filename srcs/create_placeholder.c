@@ -14,8 +14,8 @@
 
 static char		*g_flags[6] = {"#", "0", "-", "+", " ", NULL};
 static char		*g_lengths[7] = {"hh", "h", "l", "ll", "j", "z", NULL};
-static char		*g_types[16] = {"s", "S", "p", "d", "D", "i",
-	"o", "O", "u", "U", "x", "X", "c", "C", "%", NULL};
+static char		g_types[16] = {'s', 'S', 'p', 'd', 'D', 'i',
+	'o', 'O', 'u', 'U', 'x', 'X', 'c', 'C', '%', 0};
 
 t_placeholder	*create_placeholder(const char **format)
 {
@@ -50,9 +50,9 @@ t_placeholder	*create_placeholder(const char **format)
 		ph->length = ft_strmerge(ph->length, s);
 		formatptr++;
 	}
-	if ((s = ft_contstr(g_types, formatptr)))
+	if (ft_strcont(g_types, *formatptr))
 	{
-		ph->type = ft_strmerge(ph->type, ft_strdup(s));
+		ph->type = *formatptr;
 		formatptr++;
 	}
 	else

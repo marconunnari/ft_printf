@@ -9,25 +9,25 @@ char					*printuint(t_placeholder *ph, va_list ap)
 	(void)ph;
 	i = va_arg(ap, unsigned int);
 	base = 10;
-	if (ph->type[0] == 'x' || ph->type[0] == 'X'
-			|| ph->type[0] == 'p')
+	if (ph->type == 'x' || ph->type == 'X'
+			|| ph->type == 'p')
 		base = 16;
-	if (ph->type[0] == 'o')
+	if (ph->type == 'o')
 		base = 8;
 	str = ft_ulltoa_base(i, base);
-	if (ph->type[0] == 'p')
+	if (ph->type == 'p')
 		REASSIGN(str, ft_strjoin("0x", str));
 	if (ft_strcont(ph->flags,'#'))
 	{
 		if (!ft_strequ(str, "0"))
 		{
-			if (ph->type[0] == 'x' || ph->type[0] == 'X')
+			if (ph->type == 'x' || ph->type == 'X')
 				REASSIGN(str, ft_strjoin("0x", str));
-			if (ph->type[0] == 'o'	)
+			if (ph->type == 'o'	)
 				REASSIGN(str, ft_strjoin("0", str));
 		}
 	}
-	if (ph->type[0] == 'X')
+	if (ph->type == 'X')
 		str = ft_strtoupper(str);
 	return (str);
 }

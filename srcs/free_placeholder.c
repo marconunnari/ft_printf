@@ -18,6 +18,5 @@ void	free_placeholder(t_placeholder *ph)
 	free(ph->width);
 	free(ph->precision);
 	free(ph->length);
-	free(ph->type);
 	free(ph);
 }

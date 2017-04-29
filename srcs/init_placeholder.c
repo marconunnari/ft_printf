@@ -21,6 +21,5 @@ t_placeholder	*init_placeholder()
 	res->width = ft_strnew(0);
 	res->precision = ft_strnew(0);
 	res->length = ft_strnew(0);
-	res->type = ft_strnew(0);
 	return (res);
 }
