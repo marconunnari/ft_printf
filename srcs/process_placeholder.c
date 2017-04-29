@@ -6,7 +6,7 @@
 /*   By: mnunnari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/26 18:20:13 by mnunnari          #+#    #+#             */
-/*   Updated: 2017/04/29 16:59:39 by mnunnari         ###   ########.fr       */
+/*   Updated: 2017/04/29 18:34:39 by mnunnari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static t_typefunct			g_typefuncts[11] =
 	{'x', &printuint},
 	{'X', &printuint},
 	{'o', &printuint},
-	{'p', &printptr},
+	{'p', &printuint},
 	{'%', &printpercent},
 	{0, NULL}
 };
