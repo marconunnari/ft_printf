@@ -84,12 +84,57 @@ char					*printuint(t_placeholder *ph, va_list ap)
 	return (str);
 }
 
+char		*wchartostring(wchar_t chr)
+{
+	char		*str;
+
+	if (chr < (1 << 7))
+	{
+		str = ft_strnew(1);
+		str[0] = (unsigned char)(chr);
+	}
+	else if (chr < (1 << 11))
+	{
+		str = ft_strnew(2);
+		str[0] = (unsigned char)((chr >> 6) | 0xC0);
+		str[1] = (unsigned char)((chr & 0x3F) | 0x80);
+	}
+	else if (chr < (1 << 16))
+	{
+		str = ft_strnew(3);
+		str[0] = (unsigned char)(((chr >> 12)) | 0xE0);
+		str[1] = (unsigned char)(((chr >> 6) & 0x3F) | 0x80);
+		str[2] = (unsigned char)((chr & 0x3F) | 0x80);
+	}
+	else if (chr < (1 << 21))
+	{
+		str = ft_strnew(4);
+		str[0] = (unsigned char)(((chr >> 18)) | 0xF0);
+		str[1] = (unsigned char)(((chr >> 12) & 0x3F) | 0x80);
+		str[2] = (unsigned char)(((chr >> 6) & 0x3F) | 0x80);
+		str[3] = (unsigned char)((chr & 0x3F) | 0x80);
+	}
+	return (str);
+}
+
+char					*printwchr(t_placeholder *ph, va_list ap)
+{
+	wchar_t		chr;
+	char		*str;
+
+	(void)ph;
+	chr = va_arg(ap, wchar_t);
+	str = wchartostring(chr);
+	return (str);
+}
+
 char					*printchr(t_placeholder *ph, va_list ap)
 {
 	char	chr;
 	char	*str;
 
-	(void)ph;
+	if (ft_strequ(ph->length, "l"))
+		return (printwchr(ph, ap));
 	chr = va_arg(ap, int);
 	str = ft_strnew(1);
 	str[0] = chr;
