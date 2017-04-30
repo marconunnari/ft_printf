@@ -41,5 +41,7 @@ char					*printchr(t_placeholder *ph, va_list ap);
 char					*printstr(t_placeholder *ph, va_list ap);
 char					*printwstr(t_placeholder *ph, va_list ap);
 char					*printpercent(t_placeholder *ph, va_list ap);
+char					*printwchr(t_placeholder *ph, va_list ap);
+char					*printwstr(t_placeholder *ph, va_list ap);
 
 #endif

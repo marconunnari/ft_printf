@@ -14,8 +14,8 @@
 
 static char		*g_flags[6] = {"#", "0", "-", "+", " ", NULL};
 static char		*g_lengths[7] = {"hh", "h", "ll", "l", "j", "z", NULL};
-static char		g_types[16] = {'s', 'S', 'p', 'd', 'D', 'i',
-	'o', 'O', 'u', 'U', 'x', 'X', 'c', 'C', '%', 0};
+static char		g_types[17] = {'s', 'S', 'p', 'd', 'D', 'i',
+	'o', 'O', 'u', 'U', 'x', 'X', 'c', 'C', '%', 'b', 0};
 
 t_placeholder	*create_placeholder(const char **format)
 {
