@@ -17,25 +17,6 @@ intmax_t	getintarg(t_placeholder *ph, va_list ap)
 	return (va_arg(ap, int));
 }
 
-char					*printint(t_placeholder *ph, va_list ap)
-{
-	intmax_t			i;
-	char				*str;
-
-	i = getintarg(ph, ap);
-	str = ft_imaxtoa(i);
-	if (ft_strcont(ph->flags, '+') && str[0] != '-')
-	{
-		REASSIGN(str, ft_strjoin("+", str));
-	}
-	else
-	{
-		if (ft_strcont(ph->flags, ' ') && str[0] != '-')
-			REASSIGN(str, ft_strjoin(" ", str));
-	}
-	return (str);
-}
-
 uintmax_t	getuintarg(t_placeholder *ph, va_list ap)
 {
 	if (ft_strequ(ph->length, "hh"))
@@ -52,6 +33,47 @@ uintmax_t	getuintarg(t_placeholder *ph, va_list ap)
 	if (ft_strequ(ph->length, "z"))
 		return (va_arg(ap, size_t));
 	return (va_arg(ap, unsigned int));
+}
+
+void					manageprecision(t_placeholder *ph, char **str)
+{
+	char				*prefix;
+	int					precision;
+	int				strlen;
+
+	precision = ft_atoi(ph->precision);
+	if (ft_strequ(ph->precision, "0") && ft_strequ(*str, "0"))
+	{
+		*str = ft_strdup("");
+		return ;
+	}
+	strlen = ft_strlen(*str);
+	if (ft_strlen(ph->precision) != 0 && precision > strlen)
+	{
+		prefix = ft_strnew(precision - strlen);
+		ft_memset(prefix, '0', precision - strlen);
+		*str = ft_strmerge(prefix, *str);
+	}
+}
+
+char					*printint(t_placeholder *ph, va_list ap)
+{
+	intmax_t			i;
+	char				*str;
+
+	i = getintarg(ph, ap);
+	str = ft_imaxtoa(i);
+	if (ft_strcont(ph->flags, '+') && str[0] != '-')
+	{
+		REASSIGN(str, ft_strjoin("+", str));
+	}
+	else
+	{
+		if (ft_strcont(ph->flags, ' ') && str[0] != '-')
+			REASSIGN(str, ft_strjoin(" ", str));
+	}
+	manageprecision(ph, &str);
+	return (str);
 }
 
 char					*printuint(t_placeholder *ph, va_list ap)
@@ -72,9 +94,10 @@ char					*printuint(t_placeholder *ph, va_list ap)
 	str = ft_uimaxtoa_base(i, base);
 	if (ph->type == 'p')
 		REASSIGN(str, ft_strjoin("0x", str));
+	manageprecision(ph, &str);
 	if (ft_strcont(ph->flags,'#'))
 	{
-		if (!ft_strequ(str, "0"))
+		if (i != 0)
 		{
 			if (ph->type == 'x' || ph->type == 'X')
 				REASSIGN(str, ft_strjoin("0x", str));
