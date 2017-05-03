@@ -43,10 +43,12 @@ $(NAME): $(OBJSDIR) $(OBJS) $(LIBFTOBJS)
 	ar rcs $(NAME) $(OBJS) $(LIBFTOBJS)
 
 clean:
+	make clean -C libft
 	rm -rf $(OBJSDIR)
 	rm -f $(LIBFT)
 
 fclean: clean
+	make fclean -C libft
 	rm -f $(NAME)
 
 re: fclean all
