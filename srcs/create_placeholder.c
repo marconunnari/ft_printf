@@ -44,6 +44,8 @@ t_placeholder	*create_placeholder(const char **format)
 			ph->precision = ft_strappend(ph->precision, *formatptr);
 			formatptr++;
 		}
+		if (ft_strlen(ph->precision) == 0)
+			ph->precision = ft_strappend(ph->precision, '0');
 	}
 	if ((s = ft_contstr(g_lengths, formatptr)))
 	{
