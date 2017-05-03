@@ -4,6 +4,7 @@ char		*wchartostr(wchar_t wchr)
 {
 	char		*str;
 
+	str = NULL;
 	if (wchr < (1 << 7))
 	{
 		str = ft_strnew(1);
@@ -22,7 +23,7 @@ char		*wchartostr(wchar_t wchr)
 		str[1] = (unsigned char)(((wchr >> 6) & 0x3F) | 0x80);
 		str[2] = (unsigned char)((wchr & 0x3F) | 0x80);
 	}
-	else if (wchr < (1 << 21))
+	else
 	{
 		str = ft_strnew(4);
 		str[0] = (unsigned char)(((wchr >> 18)) | 0xF0);
