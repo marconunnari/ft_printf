@@ -12,6 +12,20 @@
 
 #include "libftprintf.h"
 
+void			ft_putstr(char const *s)
+{
+	if (!s)
+		return ;
+	while (*s)
+	{
+		if (*s == 1)
+			ft_putchar('\0');
+		else
+			ft_putchar(*s);
+		s++;
+	}
+}
+
 int			ft_vasprintf(char **str, const char *format, va_list ap)
 {
 	char		*res;

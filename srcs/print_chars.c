@@ -9,6 +9,8 @@ char					*printchr(t_placeholder *ph, va_list ap)
 		return (printwchr(ph, ap));
 	chr = va_arg(ap, int);
 	str = ft_strnew(1);
+	if (chr == 0)
+		chr = 1;
 	str[0] = chr;
 	return (str);
 }
