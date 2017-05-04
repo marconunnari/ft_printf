@@ -44,7 +44,7 @@ void					manageprecision(t_placeholder *ph, char **str)
 	precision = ft_atoi(ph->precision);
 	if (ft_strequ(ph->precision, "0") && ft_strequ(*str, "0"))
 	{
-		*str = ft_strdup("");
+		REASSIGN(*str, ft_strdup(""));
 		return ;
 	}
 	strlen = ft_strlen(*str);

@@ -59,6 +59,8 @@ char					*wstrtostr(wchar_t *wstr, int len)
 		i += ft_strlen(tmp);
 		if (i <= len)
 			str = ft_strmerge(str, tmp);
+		else
+			free(tmp);
 		wstr++;
 	}
 	return (str);

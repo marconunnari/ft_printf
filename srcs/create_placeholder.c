@@ -86,7 +86,7 @@ t_placeholder	*create_placeholder(const char **format)
 		formatptr++;
 	}
 	else
-		ph = NULL;
+		free_placeholder(ph);
 	*format = *format + (formatptr - *format);
 	return (ph);
 }

@@ -77,7 +77,7 @@ char					*width(char *str, t_placeholder *ph)
 				fix[0] = '+';
 				str[0] = '0';
 			}
-			if (ft_strcont(str, '-'))
+			if (str[0] == '-')
 			{
 				fix[0] = '-';
 				str[0] = '0';
