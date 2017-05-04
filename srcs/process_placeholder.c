@@ -6,7 +6,7 @@
 /*   By: mnunnari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/26 18:20:13 by mnunnari          #+#    #+#             */
-/*   Updated: 2017/05/04 14:56:47 by mnunnari         ###   ########.fr       */
+/*   Updated: 2017/05/04 17:42:59 by mnunnari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,23 @@ char					*width(char *str, t_placeholder *ph)
 	if (ft_strlen(ph->width) != 0 && width > strlen)
 	{
 		fix = ft_strnew(width - strlen);
-		if (ft_strcont(ph->flags, '0') && !ft_strcont(ph->flags, '-'))
+		if (ft_strcont(ph->flags, '0') && !ft_strcont(ph->flags, '-') && ft_strlen(ph->precision) == 0)
 		{
 			ft_memset(fix, '0', width - strlen);
 			if (ft_strcont(ph->flags, '#') && ph->type == 'x')
 				fix[1] = 'x';
 			if (ft_strcont(ph->flags, '#') && ph->type == 'X')
 				fix[1] = 'X';
+			if (ft_strcont(ph->flags, '+') && str[0] == '+')
+			{
+				fix[0] = '+';
+				str[0] = '0';
+			}
+			if (ft_strcont(str, '-'))
+			{
+				fix[0] = '-';
+				str[0] = '0';
+			}
 		}
 		else
 			ft_memset(fix, ' ', width - strlen);

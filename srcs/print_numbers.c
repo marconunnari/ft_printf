@@ -2,12 +2,12 @@
 
 intmax_t	getintarg(t_placeholder *ph, va_list ap)
 {
+	if (ft_strequ(ph->length, "l") || ph->type == 'D')
+		return (va_arg(ap, long));
 	if (ft_strequ(ph->length, "hh"))
 		return ((signed char)va_arg(ap, int));
 	if (ft_strequ(ph->length, "h"))
 		return ((short)va_arg(ap, int));
-	if (ft_strequ(ph->length, "l") || ph->type == 'D')
-		return (va_arg(ap, long));
 	if (ft_strequ(ph->length, "ll"))
 		return (va_arg(ap, long long));
 	if (ft_strequ(ph->length, "j") || ph->type == 'p')
@@ -19,17 +19,17 @@ intmax_t	getintarg(t_placeholder *ph, va_list ap)
 
 uintmax_t	getuintarg(t_placeholder *ph, va_list ap)
 {
+	if (ft_strequ(ph->length, "j") || ph->type == 'p')
+		return (va_arg(ap, uintmax_t));
+	if (ft_strequ(ph->length, "l") || ph->type == 'U'
+			|| ph->type == 'O')
+		return (va_arg(ap, unsigned long));
 	if (ft_strequ(ph->length, "hh"))
 		return ((unsigned char)va_arg(ap, int));
 	if (ft_strequ(ph->length, "h"))
 		return ((unsigned short)va_arg(ap, int));
-	if (ft_strequ(ph->length, "l") || ph->type == 'U'
-			|| ph->type == 'O')
-		return (va_arg(ap, unsigned long));
 	if (ft_strequ(ph->length, "ll"))
 		return (va_arg(ap, unsigned long long));
-	if (ft_strequ(ph->length, "j") || ph->type == 'p')
-		return (va_arg(ap, uintmax_t));
 	if (ft_strequ(ph->length, "z"))
 		return (va_arg(ap, size_t));
 	return (va_arg(ap, unsigned int));
@@ -48,10 +48,17 @@ void					manageprecision(t_placeholder *ph, char **str)
 		return ;
 	}
 	strlen = ft_strlen(*str);
-	if (ft_strlen(ph->precision) != 0 && precision > strlen)
+	if (**str == '-')
+		strlen--;
+	if (ft_strlen(ph->precision) != 0 && precision >= strlen)
 	{
 		prefix = ft_strnew(precision - strlen);
 		ft_memset(prefix, '0', precision - strlen);
+		if (**str == '-')
+		{
+			prefix[0] = '-';
+			**str = '0';
+		}
 		*str = ft_strmerge(prefix, *str);
 	}
 }
@@ -63,7 +70,8 @@ char					*printint(t_placeholder *ph, va_list ap)
 
 	i = getintarg(ph, ap);
 	str = ft_imaxtoa(i);
-	if (ft_strcont(ph->flags, '+') && str[0] != '-')
+	manageprecision(ph, &str);
+	if (ft_strcont(ph->flags, '+') && ft_atoi(str) >= 0)
 	{
 		REASSIGN(str, ft_strjoin("+", str));
 	}
@@ -72,7 +80,6 @@ char					*printint(t_placeholder *ph, va_list ap)
 		if (ft_strcont(ph->flags, ' ') && str[0] != '-')
 			REASSIGN(str, ft_strjoin(" ", str));
 	}
-	manageprecision(ph, &str);
 	return (str);
 }
 
@@ -99,11 +106,14 @@ char					*printuint(t_placeholder *ph, va_list ap)
 	{
 		if (i != 0)
 		{
-			if ((ph->type == 'x' || ph->type == 'X') && !(ft_strcont(ph->flags,'#') && ft_strcont(ph->flags,'0')))
+			if ((ph->type == 'x' || ph->type == 'X')
+					&& (!(ft_strcont(ph->flags,'#') && ft_strcont(ph->flags,'0'))
+					|| (ft_strcont(ph->flags,'-')))
+					)
 				REASSIGN(str, ft_strjoin("0x", str));
-			if (ph->type == 'o')
-				REASSIGN(str, ft_strjoin("0", str));
 		}
+		if (!ft_strequ(str, "0") && ph->type == 'o')
+			REASSIGN(str, ft_strjoin("0", str));
 	}
 	if (ph->type == 'X')
 		str = ft_strtoupper(str);
