@@ -99,7 +99,7 @@ char					*printuint(t_placeholder *ph, va_list ap)
 	{
 		if (i != 0)
 		{
-			if (ph->type == 'x' || ph->type == 'X')
+			if ((ph->type == 'x' || ph->type == 'X') && !(ft_strcont(ph->flags,'#') && ft_strcont(ph->flags,'0')))
 				REASSIGN(str, ft_strjoin("0x", str));
 			if (ph->type == 'o')
 				REASSIGN(str, ft_strjoin("0", str));
