@@ -112,7 +112,7 @@ char					*printuint(t_placeholder *ph, va_list ap)
 					)
 				REASSIGN(str, ft_strjoin("0x", str));
 		}
-		if (!ft_strequ(str, "0") && ph->type == 'o')
+		if (!ft_strequ(str, "0") && (ph->type == 'o' || ph->type == 'O'))
 			REASSIGN(str, ft_strjoin("0", str));
 	}
 	if (ph->type == 'X')

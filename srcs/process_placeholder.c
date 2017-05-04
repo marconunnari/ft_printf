@@ -72,6 +72,11 @@ char					*width(char *str, t_placeholder *ph)
 				fix[1] = 'x';
 			if (ft_strcont(ph->flags, '#') && ph->type == 'X')
 				fix[1] = 'X';
+			if (ft_strcont(ph->flags, ' ') && str[0] == ' ')
+			{
+				fix[0] = ' ';
+				str[0] = '0';
+			}
 			if (ft_strcont(ph->flags, '+') && str[0] == '+')
 			{
 				fix[0] = '+';
