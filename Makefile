@@ -11,6 +11,7 @@ LIBFTHEADERSDIR=libft/includes
 INCLUDES=-I$(HEADERSDIR) -I$(LIBFTHEADERSDIR)
 
 SRCS= ft_printf.c \
+	  ft_puts.c \
 
 LIBFTSRCS= ft_strlen.c \
 

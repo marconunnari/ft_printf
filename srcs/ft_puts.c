@@ -1,25 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_puts.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnunnari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/06 17:39:33 by mnunnari          #+#    #+#             */
-/*   Updated: 2017/05/06 18:58:55 by mnunnari         ###   ########.fr       */
+/*   Created: 2017/05/06 18:32:00 by mnunnari          #+#    #+#             */
+/*   Updated: 2017/05/06 18:40:21 by mnunnari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-extern int g_res;
+int		g_res;
 
-int				ft_printf(const char *format, ...)
+void			ft_putchar_fd(char c, int fd)
 {
-	va_list		ap;
+	write(fd, &c, 1);
+	g_res++;
+}
 
-	va_start(ap, format);
-	do_print(format, ap);
-	va_end(ap);
-	return (g_res);
+void			ft_putstr_fd(const char *str, int fd)
+{
+	int		len;
+
+	len = ft_strlen(str);
+	write(fd, str, len);
+	g_res += len;
+}
+
+void			ft_putchar(char c)
+{
+	ft_putchar_fd(c, 1);
+}
+
+void			ft_putstr(const char *str)
+{
+	ft_putstr_fd(str, 1);
 }
