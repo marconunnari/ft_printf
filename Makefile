@@ -2,25 +2,20 @@ NAME=libftprintf.a
 
 CFLAGS=-Wall -Wextra -Werror
 
-OBJSDIR = objs
-SRCSDIR = srcs
-HEADERSDIR = includes
+OBJSDIR=objs
+LIBFTOBJSDIR=$(OBJSDIR)/libft
+SRCSDIR=srcs
+LIBFTSRCSDIR=libft
+HEADERSDIR=includes
 LIBFTHEADERSDIR=libft/includes
 INCLUDES=-I$(HEADERSDIR) -I$(LIBFTHEADERSDIR)
-LIBFT=libft/libft.a
-LIBFTOBJSDIR=$(OBJSDIR)/libft
 
 SRCS= ft_printf.c \
-	init_placeholder.c \
-	free_placeholder.c \
-	create_placeholder.c \
-	process_placeholder.c \
-	print_numbers.c \
-	print_chars.c \
-	print_wchars.c \
+
+LIBFTSRCS= ft_strlen.c \
 
 OBJS := $(SRCS:%.c=$(OBJSDIR)/%.o)
-LIBFTOBJS=$(LIBFTOBJSDIR)/*.o
+LIBFTOBJS := $(LIBFTSRCS:%.c=$(LIBFTOBJSDIR)/%.o)
 
 all: $(NAME)
 
@@ -33,13 +28,10 @@ $(LIBFTOBJSDIR): $(OBJSDIR)
 $(OBJS): $(OBJSDIR)/%.o: $(SRCSDIR)/%.c
 	gcc $(CFLAGS) -c $< -o $@ $(INCLUDES)
 
-$(LIBFTOBJS): $(LIBFTOBJSDIR)
-	rm -f $(LIBFTOBJS)
-	make -C libft
-	cp $(LIBFT) $(LIBFTOBJSDIR)/libft.a
-	cd $(LIBFTOBJSDIR) && ar -x libft.a
+$(LIBFTOBJS): $(LIBFTOBJSDIR)/%.o: $(LIBFTSRCSDIR)/%.c
+	gcc $(CFLAGS) -c $< -o $@ $(INCLUDES)
 
-$(NAME): $(OBJSDIR) $(OBJS) $(LIBFTOBJS)
+$(NAME): $(OBJSDIR) $(OBJS) $(LIBFTOBJSDIR) $(LIBFTOBJS)
 	ar rcs $(NAME) $(OBJS) $(LIBFTOBJS)
 
 clean:

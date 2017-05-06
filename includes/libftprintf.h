@@ -6,7 +6,7 @@
 /*   By: mnunnari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/24 16:46:32 by mnunnari          #+#    #+#             */
-/*   Updated: 2017/04/29 18:35:28 by mnunnari         ###   ########.fr       */
+/*   Updated: 2017/05/06 17:37:48 by mnunnari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,32 +16,6 @@
 # include <stdarg.h>
 # include "../libft/includes/libft.h"
 
-typedef struct	s_placeholder
-{
-	char		*flags;
-	char		*width;
-	char		*precision;
-	char		*length;
-	char		type;
-}				t_placeholder;
-
 int				ft_printf(const char *restrict format, ...);
-int			ft_vasprintf(char **str, const char *format, va_list ap);
-int				ft_asprintf(char **str, const char *format, ...);
-
-t_placeholder	*create_placeholder(const char **format);
-t_placeholder	*init_placeholder();
-void			free_placeholder(t_placeholder	*ph);
-
-char				*process_placeholder(t_placeholder *ph, va_list ap);
-
-char					*printint(t_placeholder *ph, va_list ap);
-char					*printuint(t_placeholder *ph, va_list ap);
-char					*printchr(t_placeholder *ph, va_list ap);
-char					*printstr(t_placeholder *ph, va_list ap);
-char					*printwstr(t_placeholder *ph, va_list ap);
-char					*printpercent(t_placeholder *ph, va_list ap);
-char					*printwchr(t_placeholder *ph, va_list ap);
-char					*printwstr(t_placeholder *ph, va_list ap);
 
 #endif
