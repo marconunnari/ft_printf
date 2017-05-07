@@ -15,8 +15,11 @@
 void		conv_du(t_placeholder *ph, va_list ap)
 {
 	long		d;
+	char		*str;
 
 	(void)ph;
 	d = va_arg(ap, long);
-	ft_putstr_fd(ft_imaxtoa(d), 1);
+	str = ft_imaxtoa(d);
+	ft_putstr_fd(str, 1);
+	ft_strdel(&str);
 }

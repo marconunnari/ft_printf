@@ -20,7 +20,7 @@ t_placeholder	*initph()
 	res->parameter = -1;
 	res->flags = ft_strnew(0);
 	res->width = 0;
-	res->precision = 0;
+	res->precision = -1;
 	res->length = ft_strnew(0);
 	res->type = 0;
 	return (res);

@@ -36,6 +36,7 @@ LIBFTSRCS= ft_strlen.c \
 	ft_strrev.c \
 	ft_strdup.c \
 	ft_memcpy.c \
+	ft_memset.c \
 	ft_strcont.c \
 	ft_strappend.c \
 	ft_isdigit.c \
@@ -44,6 +45,11 @@ LIBFTSRCS= ft_strlen.c \
 	ft_islower.c \
 	ft_toupper.c \
 	ft_strtoupper.c \
+	ft_strjoin.c \
+	ft_strmerge.c \
+	ft_strsub.c \
+	ft_strncpy.c \
+	ft_strcat.c \
 
 OBJS := $(SRCS:%.c=$(OBJSDIR)/%.o)
 LIBFTOBJS := $(LIBFTSRCS:%.c=$(LIBFTOBJSDIR)/%.o)

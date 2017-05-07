@@ -15,8 +15,11 @@
 void			conv_o(t_placeholder *ph, va_list ap)
 {
 	unsigned int	u;
+	char		*str;
 
 	(void)ph;
 	u = va_arg(ap, unsigned int);
-	ft_putstr_fd(ft_uimaxtoa_base(u, 8), 1);
+	str = ft_uimaxtoa_base(u, 8);
+	ft_putstr_fd(str, 1);
+	ft_strdel(&str);
 }

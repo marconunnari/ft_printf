@@ -24,7 +24,7 @@ void			get_flags(const char **format, t_placeholder *ph)
 
 	while (ft_strcont(g_flags, **format))
 	{
-		ft_strappend(ph->flags, **format);
+		ph->flags = ft_strappend(ph->flags, **format);
 		*format += 1;
 	}
 }
@@ -43,6 +43,7 @@ void			get_precision(const char **format, t_placeholder *ph)
 	while (**format == '.')
 	{
 		*format += 1;
+		ph->precision = 0;
 		while(ft_isdigit(**format))
 		{
 			ph->precision = ph->precision * 10 + (**format - '0');

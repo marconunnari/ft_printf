@@ -15,9 +15,12 @@
 void			conv_p(t_placeholder *ph, va_list ap)
 {
 	uintmax_t	u;
+	char		*str;
 
 	(void)ph;
 	u = va_arg(ap, uintmax_t);
 	ft_putstr_fd("0x", 1);
-	ft_putstr_fd(ft_uimaxtoa_base(u, 16), 1);
+	str = ft_uimaxtoa_base(u, 16);
+	ft_putstr_fd(str, 1);
+	ft_strdel(&str);
 }
