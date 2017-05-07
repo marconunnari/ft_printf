@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_doconv.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mnunnari <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/05/07 15:43:44 by mnunnari          #+#    #+#             */
+/*   Updated: 2017/05/07 19:16:27 by mnunnari         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libftprintf.h"
 
 typedef void (*t_conv)(t_placeholder*, va_list);
@@ -8,10 +20,21 @@ typedef struct		s_typeconv
 	t_conv			conv;
 }			t_typeconv;
 
-static t_typeconv	g_typeconvs[3] =
+static t_typeconv	g_typeconvs[14] =
 {
 	{'s', &conv_s},
+	{'S', &conv_ws},
 	{'d', &conv_d},
+	{'D', &conv_du},
+	{'i', &conv_d},
+	{'c', &conv_c},
+	{'C', &conv_wc},
+	{'%', &conv_pc},
+	{'u', &conv_u},
+	{'x', &conv_x},
+	{'X', &conv_xu},
+	{'o', &conv_o},
+	{'p', &conv_p},
 	{0, NULL}
 };
 

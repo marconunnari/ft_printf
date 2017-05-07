@@ -6,7 +6,7 @@
 /*   By: mnunnari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/24 16:46:32 by mnunnari          #+#    #+#             */
-/*   Updated: 2017/05/06 19:41:09 by mnunnari         ###   ########.fr       */
+/*   Updated: 2017/05/07 19:09:07 by mnunnari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ int				ft_printf(const char *restrict format, ...);
 
 void			ft_putchar_fd(char c, int fd);
 void			ft_putstr_fd(const char *str, int fd);
-void			ft_putchar(char c);
-void			ft_putstr(const char *str);
+void			ft_putwchar_fd(wchar_t wchr, int fd);
+void			ft_putwstr_fd(const wchar_t *wstr, int fd);
 
 void			do_print(const char *format, va_list ap);
 void			do_conv(const char **format, va_list ap);
@@ -46,7 +46,25 @@ void			get_precision(const char **format, t_placeholder *ph);
 void			get_length(const char **format, t_placeholder *ph);
 void			get_type(const char **format, t_placeholder *ph);
 
-void		conv_s(t_placeholder *ph, va_list ap);
-void		conv_d(t_placeholder *ph, va_list ap);
+void			conv_s(t_placeholder *ph, va_list ap);
+void			conv_d(t_placeholder *ph, va_list ap);
+void			conv_du(t_placeholder *ph, va_list ap);
+void			conv_ws(t_placeholder *ph, va_list ap);
+void			conv_c(t_placeholder *ph, va_list ap);
+void			conv_pc(t_placeholder *ph, va_list ap);
+void			conv_wc(t_placeholder *ph, va_list ap);
+void			conv_u(t_placeholder *ph, va_list ap);
+void			conv_x(t_placeholder *ph, va_list ap);
+void			conv_xu(t_placeholder *ph, va_list ap);
+void			conv_p(t_placeholder *ph, va_list ap);
+void			conv_o(t_placeholder *ph, va_list ap);
+
+typedef char *(*t_tostr)(wchar_t wchr);
+typedef struct	s_sizewchr
+{
+	int			size;
+	t_tostr		tostr;
+}				t_sizewchr;
+char			*wchartostr(wchar_t wchr);
 
 #endif

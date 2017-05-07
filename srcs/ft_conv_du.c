@@ -1,38 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_puts.c                                          :+:      :+:    :+:   */
+/*   ft_conv_du.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnunnari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/06 18:32:00 by mnunnari          #+#    #+#             */
-/*   Updated: 2017/05/07 18:04:45 by mnunnari         ###   ########.fr       */
+/*   Created: 2017/05/07 19:09:41 by mnunnari          #+#    #+#             */
+/*   Updated: 2017/05/07 19:09:43 by mnunnari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int		g_res;
-
-void			ft_putchar_fd(char c, int fd)
+void		conv_du(t_placeholder *ph, va_list ap)
 {
-	write(fd, &c, 1);
-	g_res++;
-}
+	long		d;
 
-void			ft_putstr_fd(const char *str, int fd)
-{
-	while (*str)
-		ft_putchar_fd(*str++, fd);
-}
-
-void			ft_putwchar_fd(wchar_t wchr, int fd)
-{
-	ft_putstr_fd(wchartostr(wchr), fd);
-}
-
-void			ft_putwstr_fd(const wchar_t *wstr, int fd)
-{
-	while (*wstr)
-		ft_putstr_fd(wchartostr(*wstr++), fd);
+	(void)ph;
+	d = va_arg(ap, long);
+	ft_putstr_fd(ft_imaxtoa(d), 1);
 }
