@@ -10,22 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-void			do_conv(const char **format, va_list ap)
-{
-	char		*formatptr;
-
-	(void)ap;
-	formatptr = *format + 1;
-}
+#include "libftprintf.h"
 
 void			do_print(const char *format, va_list ap)
 {
 	while (*format)
 	{
-		if (*format == '%')
+		while (*format != '%')
+			ft_putchar(*format++);
+		while (*format == '%')
 			do_conv(&format, ap);
-		else
-			ft_putchar(*format);
-		format++;
 	}
 }
