@@ -6,7 +6,7 @@
 /*   By: mnunnari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/07 15:43:28 by mnunnari          #+#    #+#             */
-/*   Updated: 2017/05/07 17:51:23 by mnunnari         ###   ########.fr       */
+/*   Updated: 2017/05/09 19:34:48 by mnunnari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void			get_parameter(const char **format, t_placeholder *ph)
 
 void			get_flags(const char **format, t_placeholder *ph)
 {
-	char	*g_flags = "#0-+";
+	char	*g_flags = "#0-+ ";
 
 	while (ft_strcont(g_flags, **format))
 	{
@@ -58,7 +58,7 @@ void			get_length(const char **format, t_placeholder *ph)
 
 	while (ft_strcont(g_lengths, **format))
 	{
-		ft_strappend(ph->length, **format);
+		ph->length = ft_strappend(ph->length, **format);
 		*format += 1;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: mnunnari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/24 16:46:32 by mnunnari          #+#    #+#             */
-/*   Updated: 2017/05/07 19:09:07 by mnunnari         ###   ########.fr       */
+/*   Updated: 2017/05/09 19:56:48 by mnunnari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,15 @@ void			get_type(const char **format, t_placeholder *ph);
 
 void			conv_s(t_placeholder *ph, va_list ap);
 void			conv_d(t_placeholder *ph, va_list ap);
-void			conv_du(t_placeholder *ph, va_list ap);
 void			conv_ws(t_placeholder *ph, va_list ap);
 void			conv_c(t_placeholder *ph, va_list ap);
 void			conv_pc(t_placeholder *ph, va_list ap);
 void			conv_wc(t_placeholder *ph, va_list ap);
 void			conv_u(t_placeholder *ph, va_list ap);
 void			conv_x(t_placeholder *ph, va_list ap);
-void			conv_xu(t_placeholder *ph, va_list ap);
-void			conv_p(t_placeholder *ph, va_list ap);
 void			conv_o(t_placeholder *ph, va_list ap);
+
+void			width(t_placeholder *ph, char **str);
 
 typedef char *(*t_tostr)(wchar_t wchr);
 typedef struct	s_sizewchr

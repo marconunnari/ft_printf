@@ -16,23 +16,21 @@ SRCS= ft_printf.c \
 	ft_doconv.c \
 	ft_createph.c \
 	ft_getph.c \
+	ft_width.c \
 	ft_conv_s.c \
 	ft_conv_ws.c \
 	ft_conv_d.c \
-	ft_conv_du.c \
 	ft_conv_c.c \
-	ft_conv_u.c \
-	ft_conv_x.c \
-	ft_conv_xu.c \
-	ft_conv_p.c \
-	ft_conv_o.c \
 	ft_conv_wc.c \
 	ft_conv_pc.c \
+	ft_conv_uox.c \
 	ft_wchar.c \
 
 LIBFTSRCS= ft_strlen.c \
 	ft_strnew.c \
 	ft_strdel.c \
+	ft_strequ.c \
+	ft_strcmp.c \
 	ft_strrev.c \
 	ft_strdup.c \
 	ft_memcpy.c \
@@ -41,8 +39,10 @@ LIBFTSRCS= ft_strlen.c \
 	ft_strappend.c \
 	ft_isdigit.c \
 	ft_imaxtoa.c \
+	ft_imaxtoa_sign.c \
 	ft_uimaxtoa_base.c \
 	ft_islower.c \
+	ft_isupper.c \
 	ft_toupper.c \
 	ft_strtoupper.c \
 	ft_strjoin.c \
