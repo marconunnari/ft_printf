@@ -26,4 +26,3 @@ void		width(t_placeholder *ph, char **str)
 	*str = ft_strcont(ph->flags, '-') ?
 		ft_strmerge(*str, fix) : ft_strmerge(fix, *str);
 }
-

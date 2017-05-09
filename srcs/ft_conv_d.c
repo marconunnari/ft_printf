@@ -29,9 +29,8 @@ intmax_t	getintarg(t_placeholder *ph, va_list ap)
 	return (va_arg(ap, int));
 }
 
-void		psign(t_placeholder *ph)
+static void	psign(t_placeholder *ph)
 {
-	(void)ph;
 	if (ft_strcont(ph->flags, '+'))
 		ft_putchar_fd('+', 1);
 	else if (ft_strcont(ph->flags, ' '))
@@ -40,13 +39,13 @@ void		psign(t_placeholder *ph)
 		ph->width++;
 }
 
-void		lsign(t_placeholder *ph)
+static void	lsign(t_placeholder *ph)
 {
 	(void)ph;
 	ft_putchar_fd('-', 1);
 }
 
-void		ssign(t_placeholder *ph, char sign)
+static void		ssign(t_placeholder *ph, char sign)
 {
 	(void)ph;
 	if (sign == '-')
@@ -65,6 +64,7 @@ void		conv_d(t_placeholder *ph, va_list ap)
 	nbr = getintarg(ph, ap);
 	str = ft_imaxtoa_sign(nbr, &sign);
 	ssign(ph, sign);
+	numprec(ph, &str);
 	width(ph, &str);
 	ft_putstr_fd(str, 1);
 	ft_strdel(&str);

@@ -57,6 +57,7 @@ void			conv_x(t_placeholder *ph, va_list ap);
 void			conv_o(t_placeholder *ph, va_list ap);
 
 void			width(t_placeholder *ph, char **str);
+void			numprec(t_placeholder *ph, char **str);
 
 typedef char *(*t_tostr)(wchar_t wchr);
 typedef struct	s_sizewchr

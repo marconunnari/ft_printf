@@ -37,6 +37,7 @@ static void			flag(t_placeholder *ph, int upper)
 	{
 		ft_putstr_fd("0", 1);
 		ph->width--;
+		ph->precision--;
 	}
 	else
 	{
@@ -53,6 +54,7 @@ void				conv_x(t_placeholder *ph, va_list ap)
 	u = getuintarg(ph, ap);
 	str = ft_uimaxtoa_base(u, 16);
 	flag(ph, ft_isupper(ph->type));
+	numprec(ph, &str);
 	width(ph, &str);
 	if (ft_isupper(ph->type))
 		ft_strtoupper(str);
@@ -68,6 +70,7 @@ void			conv_o(t_placeholder *ph, va_list ap)
 	u = getuintarg(ph, ap);
 	str = ft_uimaxtoa_base(u, 8);
 	flag(ph, 0);
+	numprec(ph, &str);
 	width(ph, &str);
 	ft_putstr_fd(str, 1);
 	ft_strdel(&str);
@@ -80,6 +83,7 @@ void			conv_u(t_placeholder *ph, va_list ap)
 
 	u = getuintarg(ph, ap);
 	str = ft_uimaxtoa_base(u, 10);
+	numprec(ph, &str);
 	width(ph, &str);
 	ft_putstr_fd(str, 1);
 	ft_strdel(&str);

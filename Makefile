@@ -17,6 +17,7 @@ SRCS= ft_printf.c \
 	ft_createph.c \
 	ft_getph.c \
 	ft_width.c \
+	ft_numprec.c \
 	ft_conv_s.c \
 	ft_conv_ws.c \
 	ft_conv_d.c \
