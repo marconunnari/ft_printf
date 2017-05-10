@@ -59,7 +59,7 @@ void			do_conv(const char **format, va_list ap)
 
 	*format += 1;
 	ph = createph(format);
-	IFRETURNVOID(!ph->type);
+	IFRETURN(!ph->type, freeph(ph));
 	conv = get_conv(ph->type);
 	IFRETURNVOID(!conv);
 	conv(ph, ap);

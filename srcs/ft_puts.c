@@ -28,7 +28,11 @@ void			ft_putstr_fd(const char *str, int fd)
 
 void			ft_putwchar_fd(wchar_t wchr, int fd)
 {
-	ft_putstr_fd(wchartostr(wchr), fd);
+	char	*str;
+
+	str = wchartostr(wchr);
+	ft_putstr_fd(str, fd);
+	ft_strdel(&str);
 }
 
 void			ft_putwstr_fd(const wchar_t *wstr, int fd)

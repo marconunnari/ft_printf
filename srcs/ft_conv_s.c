@@ -14,9 +14,8 @@
 
 void		precision(t_placeholder *ph, char **str)
 {
-	*str = ft_strdup(*str);
 	IFRETURNVOID(ph->precision == -1 || ph->type != 's');
-	*str = ft_strsub(*str, 0, ph->precision);
+	REASSIGN(*str, ft_strsub(*str, 0, ph->precision));
 }
 
 void		conv_s(t_placeholder *ph, va_list ap)
@@ -24,11 +23,19 @@ void		conv_s(t_placeholder *ph, va_list ap)
 	char	*str;
 
 	IFRETURN(ft_strequ(ph->length, "l"), conv_ws(ph, ap))
-	str = ft_strnew(1);
-	str[0] = ph->type;
+	str = NULL;
 	if (ph->type =='s')
+	{
 		str = va_arg(ap, char*);
-	str = str != NULL ? str : "(null)";
+		if (str == NULL)
+			str = "(null)";
+		str = ft_strdup(str);
+	}
+	else
+	{
+		str = ft_strnew(1);
+		str[0] = ph->type;
+	}
 	precision(ph, &str);
 	width(ph, &str);
 	ft_putstr_fd(str, 1);

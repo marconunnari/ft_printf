@@ -65,4 +65,5 @@ void		conv_ws(t_placeholder *ph, va_list ap)
 		str = wstrtostr(wstr);
 	width(ph, &str);
 	ft_putstr_fd(str, 1);
+	ft_strdel(&str);
 }
