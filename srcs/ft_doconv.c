@@ -6,7 +6,7 @@
 /*   By: mnunnari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/07 15:43:44 by mnunnari          #+#    #+#             */
-/*   Updated: 2017/05/09 20:17:07 by mnunnari         ###   ########.fr       */
+/*   Updated: 2017/05/10 13:55:42 by mnunnari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ typedef struct		s_typeconv
 	t_conv			conv;
 }			t_typeconv;
 
-static t_typeconv	g_typeconvs[15] =
+static t_typeconv	g_typeconvs[16] =
 {
 	{'s', &conv_s},
 	{'S', &conv_ws},
@@ -36,6 +36,7 @@ static t_typeconv	g_typeconvs[15] =
 	{'x', &conv_x},
 	{'X', &conv_x},
 	{'o', &conv_o},
+	{'O', &conv_o},
 	{0, NULL}
 };
 
