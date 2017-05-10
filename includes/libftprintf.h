@@ -6,7 +6,7 @@
 /*   By: mnunnari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/24 16:46:32 by mnunnari          #+#    #+#             */
-/*   Updated: 2017/05/09 19:56:48 by mnunnari         ###   ########.fr       */
+/*   Updated: 2017/05/10 18:10:10 by mnunnari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void			conv_x(t_placeholder *ph, va_list ap);
 void			conv_o(t_placeholder *ph, va_list ap);
 
 void			width(t_placeholder *ph, char **str);
-void			numprec(t_placeholder *ph, char **str);
+void			numprec(t_placeholder *ph, char **str, int is_zero);
 
 typedef char *(*t_tostr)(wchar_t wchr);
 typedef struct	s_sizewchr

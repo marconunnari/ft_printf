@@ -32,12 +32,17 @@ LIBFTSRCS= ft_strlen.c \
 	ft_strdel.c \
 	ft_strequ.c \
 	ft_strcmp.c \
+	ft_strchr.c \
+	ft_strstr.c \
 	ft_strrev.c \
 	ft_strdup.c \
 	ft_memcpy.c \
 	ft_memset.c \
+	ft_memmove.c \
 	ft_strcont.c \
 	ft_strappend.c \
+	ft_strprepend.c \
+	ft_strremove.c \
 	ft_isdigit.c \
 	ft_imaxtoa.c \
 	ft_imaxtoa_sign.c \
@@ -45,6 +50,7 @@ LIBFTSRCS= ft_strlen.c \
 	ft_islower.c \
 	ft_isupper.c \
 	ft_toupper.c \
+	ft_tolower.c \
 	ft_strtoupper.c \
 	ft_strjoin.c \
 	ft_strmerge.c \

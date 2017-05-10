@@ -6,7 +6,7 @@
 /*   By: mnunnari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/07 15:42:54 by mnunnari          #+#    #+#             */
-/*   Updated: 2017/05/09 17:13:03 by mnunnari         ###   ########.fr       */
+/*   Updated: 2017/05/10 18:29:08 by mnunnari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void		precision(t_placeholder *ph, char **str)
 {
 	*str = ft_strdup(*str);
-	IFRETURNVOID(ph->precision == -1);
+	IFRETURNVOID(ph->precision == -1 || ph->type != 's');
 	*str = ft_strsub(*str, 0, ph->precision);
 }
 
@@ -23,8 +23,11 @@ void		conv_s(t_placeholder *ph, va_list ap)
 {
 	char	*str;
 
-	(void)ph;
-	str = va_arg(ap, char*);
+	IFRETURN(ft_strequ(ph->length, "l"), conv_ws(ph, ap))
+	str = ft_strnew(1);
+	str[0] = ph->type;
+	if (ph->type =='s')
+		str = va_arg(ap, char*);
 	str = str != NULL ? str : "(null)";
 	precision(ph, &str);
 	width(ph, &str);

@@ -6,7 +6,7 @@
 /*   By: mnunnari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/09 20:04:11 by mnunnari          #+#    #+#             */
-/*   Updated: 2017/05/09 20:19:20 by mnunnari         ###   ########.fr       */
+/*   Updated: 2017/05/10 18:34:18 by mnunnari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,61 +30,63 @@ uintmax_t	getuintarg(t_placeholder *ph, va_list ap)
 	return (va_arg(ap, unsigned int));
 }
 
-static void			flag(t_placeholder *ph, int upper)
+static void			widthflag(t_placeholder *ph, uintmax_t u)
 {
+	IFRETURNVOID(u == 0 && !(ph->type == 'p'));
 	IFRETURNVOID(!(ft_strcont(ph->flags, '#') || ph->type == 'p'));
-	if (ph->type == 'o')
-	{
-		ft_putstr_fd("0", 1);
+	if (ft_tolower(ph->type) == 'o')
 		ph->width--;
-		ph->precision--;
-	}
-	else
-	{
-		upper ? ft_putstr_fd("0X", 1) : ft_putstr_fd("0x", 1);
+	else if (ft_tolower(ph->type) == 'x' || ph->type == 'p')
 		ph->width -= 2;
-	}
 }
 
-void				conv_x(t_placeholder *ph, va_list ap)
+static void			flag(t_placeholder *ph, uintmax_t u, char **str)
+{
+	IFRETURNVOID(u == 0 && !(ph->type == 'p'));
+	IFRETURNVOID(!(ft_strcont(ph->flags, '#') || ph->type == 'p'));
+	if (ft_tolower(ph->type) == 'o')
+		*str = ft_strprepend('0', *str);
+	else if (ft_tolower(ph->type) == 'x' || ph->type == 'p')
+		REASSIGN(*str, ft_strjoin("0x", *str));
+}
+
+void				conv_base(t_placeholder *ph, va_list ap, int base)
 {
 	uintmax_t		u;
 	char		*str;
 
 	u = getuintarg(ph, ap);
-	str = ft_uimaxtoa_base(u, 16);
-	flag(ph, ft_isupper(ph->type));
-	numprec(ph, &str);
-	width(ph, &str);
+	str = ft_uimaxtoa_base(u, base);
+	if (ft_strcont(ph->flags, '0'))
+	{
+		widthflag(ph, u);
+		numprec(ph, &str, u == 0);
+		width(ph, &str);
+		flag(ph, u, &str);
+	}
+	else
+	{
+		numprec(ph, &str, u == 0);
+		flag(ph, u, &str);
+		width(ph, &str);
+	}
 	if (ft_isupper(ph->type))
 		ft_strtoupper(str);
 	ft_putstr_fd(str, 1);
 	ft_strdel(&str);
 }
 
+void			conv_x(t_placeholder *ph, va_list ap)
+{
+	conv_base(ph, ap, 16);
+}
+
 void			conv_o(t_placeholder *ph, va_list ap)
 {
-	uintmax_t		u;
-	char		*str;
-
-	u = getuintarg(ph, ap);
-	str = ft_uimaxtoa_base(u, 8);
-	flag(ph, 0);
-	numprec(ph, &str);
-	width(ph, &str);
-	ft_putstr_fd(str, 1);
-	ft_strdel(&str);
+	conv_base(ph, ap, 8);
 }
 
 void			conv_u(t_placeholder *ph, va_list ap)
 {
-	uintmax_t		u;
-	char			*str;
-
-	u = getuintarg(ph, ap);
-	str = ft_uimaxtoa_base(u, 10);
-	numprec(ph, &str);
-	width(ph, &str);
-	ft_putstr_fd(str, 1);
-	ft_strdel(&str);
+	conv_base(ph, ap, 10);
 }

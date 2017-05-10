@@ -6,7 +6,7 @@
 /*   By: mnunnari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/07 15:43:44 by mnunnari          #+#    #+#             */
-/*   Updated: 2017/05/10 13:55:42 by mnunnari         ###   ########.fr       */
+/*   Updated: 2017/05/10 18:25:03 by mnunnari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static t_typeconv	g_typeconvs[16] =
 	{'i', &conv_d},
 	{'c', &conv_c},
 	{'C', &conv_wc},
-	{'%', &conv_pc},
 	{'u', &conv_u},
 	{'U', &conv_u},
 	{'p', &conv_x},
@@ -50,7 +49,7 @@ t_conv		get_conv(char type)
 			return (g_typeconvs[i].conv);
 		i++;
 	}
-	return (NULL);
+	return (&conv_s);
 }
 
 void			do_conv(const char **format, va_list ap)

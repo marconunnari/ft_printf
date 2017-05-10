@@ -6,7 +6,7 @@
 /*   By: mnunnari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/07 15:43:28 by mnunnari          #+#    #+#             */
-/*   Updated: 2017/05/09 19:34:48 by mnunnari         ###   ########.fr       */
+/*   Updated: 2017/05/10 17:14:54 by mnunnari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,7 @@ void			get_length(const char **format, t_placeholder *ph)
 
 void			get_type(const char **format, t_placeholder *ph)
 {
-	char	*g_types = "sSpdDioOuUxXcC%";
-
-	if (ft_strcont(g_types, **format))
+	if (**format)
 	{
 		ph->type = **format;
 		*format += 1;

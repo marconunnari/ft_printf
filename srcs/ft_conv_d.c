@@ -6,7 +6,7 @@
 /*   By: mnunnari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/07 15:43:03 by mnunnari          #+#    #+#             */
-/*   Updated: 2017/05/09 19:47:55 by mnunnari         ###   ########.fr       */
+/*   Updated: 2017/05/10 19:27:39 by mnunnari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,45 +14,47 @@
 
 intmax_t	getintarg(t_placeholder *ph, va_list ap)
 {
-	if (ft_strequ(ph->length, "hh"))
-		return ((signed char)va_arg(ap, int));
-	if (ft_strequ(ph->length, "h"))
-		return ((short)va_arg(ap, int));
-	if (ft_strequ(ph->length, "l") || ph->type == 'D')
+	if ( ph->type == 'D')
 		return (va_arg(ap, long));
-	if (ft_strequ(ph->length, "ll"))
-		return (va_arg(ap, long long));
-	if (ft_strequ(ph->length, "j"))
+	if (ft_strchr(ph->length, 'j'))
 		return (va_arg(ap, intmax_t));
-	if (ft_strequ(ph->length, "z"))
+	if (ft_strchr(ph->length, 'z'))
 		return (va_arg(ap, ssize_t));
+	if (ft_strstr(ph->length, "ll"))
+		return (va_arg(ap, long long));
+	if (ft_strchr(ph->length, 'l'))
+		return (va_arg(ap, long));
+	if (ft_strstr(ph->length, "hh"))
+		return ((signed char)va_arg(ap, int));
+	if (ft_strchr(ph->length, 'h'))
+		return ((short)va_arg(ap, int));
 	return (va_arg(ap, int));
 }
 
-static void	psign(t_placeholder *ph)
+static void		widthsign(t_placeholder *ph, char sign)
 {
-	if (ft_strcont(ph->flags, '+'))
-		ft_putchar_fd('+', 1);
-	else if (ft_strcont(ph->flags, ' '))
-		ft_putchar_fd(' ', 1);
-	else
-		ph->width++;
-}
-
-static void	lsign(t_placeholder *ph)
-{
-	(void)ph;
-	ft_putchar_fd('-', 1);
-}
-
-static void		ssign(t_placeholder *ph, char sign)
-{
-	(void)ph;
 	if (sign == '-')
-		lsign(ph);
+		ph->width--;
 	else
-		psign(ph);
-	ph->width--;
+	{
+		if (ft_strcont(ph->flags, '+'))
+			ph->width--;
+		else if (ft_strcont(ph->flags, ' '))
+			ph->width--;
+	}
+}
+
+static void		ssign(t_placeholder *ph, char sign, char **str)
+{
+	if (sign == '-')
+		*str = ft_strprepend('-', *str);
+	else
+	{
+		if (ft_strcont(ph->flags, '+'))
+			*str = ft_strprepend('+', *str);
+		else if (ft_strcont(ph->flags, ' '))
+			*str = ft_strprepend(' ', *str);
+	}
 }
 
 void		conv_d(t_placeholder *ph, va_list ap)
@@ -63,9 +65,19 @@ void		conv_d(t_placeholder *ph, va_list ap)
 
 	nbr = getintarg(ph, ap);
 	str = ft_imaxtoa_sign(nbr, &sign);
-	ssign(ph, sign);
-	numprec(ph, &str);
-	width(ph, &str);
+	if (ft_strcont(ph->flags, '0'))
+	{
+		widthsign(ph, sign);
+		numprec(ph, &str, nbr == 0);
+		width(ph, &str);
+		ssign(ph, sign, &str);
+	}
+	else
+	{
+		numprec(ph, &str, nbr == 0);
+		ssign(ph, sign, &str);
+		width(ph, &str);
+	}
 	ft_putstr_fd(str, 1);
 	ft_strdel(&str);
 }
