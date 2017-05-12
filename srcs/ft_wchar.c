@@ -54,25 +54,16 @@ char				*fourbytes(wchar_t wchr)
 	return (str);
 }
 
-static t_sizewchr	g_sizewchrs[5] =
-{
-	{(1 << 7), &onebyte},
-	{(1 << 11), &twobytes},
-	{(1 << 16), &threebytes},
-	{(1 << 21), &fourbytes},
-	{0, NULL}
-};
-
 char				*wchartostr(wchar_t wchr)
 {
-	int			i;
-
-	i = 0;
-	while (g_sizewchrs[i].size)
-	{
-		if (wchr < g_sizewchrs[i].size)
-			return (g_sizewchrs[i].tostr(wchr));
-		i++;
-	}
-	return (NULL);
+	if (wchr < (MB_CUR_MAX == 1 ? 0xFF : 0x7F))
+		return onebyte(wchr);
+	else if (wchr < (1 << 11))
+		return twobytes(wchr);
+	else if (wchr < (1 << 16))
+		return threebytes(wchr);
+	else if (wchr < (1 << 21))
+		return fourbytes(wchr);
+	else
+		return (NULL);
 }

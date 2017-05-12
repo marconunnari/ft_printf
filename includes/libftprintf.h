@@ -36,7 +36,7 @@ void			ft_putwstr_fd(const wchar_t *wstr, int fd);
 void			do_print(const char *format, va_list ap);
 void			do_conv(const char **format, va_list ap);
 
-t_placeholder	*createph(const char **format);
+t_placeholder		*createph(const char **format);
 void			freeph(t_placeholder *ph);
 
 void			get_parameter(const char **format, t_placeholder *ph);
@@ -59,12 +59,6 @@ void			conv_o(t_placeholder *ph, va_list ap);
 void			width(t_placeholder *ph, char **str);
 void			numprec(t_placeholder *ph, char **str, int is_zero);
 
-typedef char *(*t_tostr)(wchar_t wchr);
-typedef struct	s_sizewchr
-{
-	int			size;
-	t_tostr		tostr;
-}				t_sizewchr;
 char			*wchartostr(wchar_t wchr);
 
 #endif
