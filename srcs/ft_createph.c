@@ -6,13 +6,13 @@
 /*   By: mnunnari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/07 15:43:21 by mnunnari          #+#    #+#             */
-/*   Updated: 2017/05/09 18:22:24 by mnunnari         ###   ########.fr       */
+/*   Updated: 2017/05/14 19:23:12 by mnunnari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-t_placeholder	*initph()
+t_placeholder	*initph(void)
 {
 	t_placeholder	*res;
 
@@ -26,17 +26,26 @@ t_placeholder	*initph()
 	return (res);
 }
 
-void		freeph(t_placeholder *ph)
+void			freeph(t_placeholder *ph)
 {
 	free(ph->flags);
 	free(ph->length);
 	free(ph);
 }
 
+void			get_type(const char **format, t_placeholder *ph)
+{
+	if (**format)
+	{
+		ph->type = **format;
+		*format += 1;
+	}
+}
+
 t_placeholder	*createph(const char **format)
 {
 	t_placeholder	*ph;
-	int			i;
+	int				i;
 
 	ph = initph();
 	get_parameter(format, ph);

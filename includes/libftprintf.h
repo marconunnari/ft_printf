@@ -6,7 +6,7 @@
 /*   By: mnunnari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/24 16:46:32 by mnunnari          #+#    #+#             */
-/*   Updated: 2017/05/10 18:10:10 by mnunnari         ###   ########.fr       */
+/*   Updated: 2017/05/14 19:28:25 by mnunnari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,14 @@ typedef struct	s_placeholder
 	char		*length;
 	char		type;
 }				t_placeholder;
+
+typedef void		(*t_conv)(t_placeholder*, va_list);
+
+typedef struct		s_typeconv
+{
+	char			type;
+	t_conv			conv;
+}			t_typeconv;
 
 int				ft_printf(const char *restrict format, ...);
 
@@ -52,6 +60,7 @@ void			conv_ws(t_placeholder *ph, va_list ap);
 void			conv_c(t_placeholder *ph, va_list ap);
 void			conv_pc(t_placeholder *ph, va_list ap);
 void			conv_wc(t_placeholder *ph, va_list ap);
+void			conv_ubase(t_placeholder *ph, va_list ap, int base);
 void			conv_u(t_placeholder *ph, va_list ap);
 void			conv_x(t_placeholder *ph, va_list ap);
 void			conv_o(t_placeholder *ph, va_list ap);

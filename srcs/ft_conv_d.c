@@ -6,15 +6,15 @@
 /*   By: mnunnari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/07 15:43:03 by mnunnari          #+#    #+#             */
-/*   Updated: 2017/05/10 19:27:39 by mnunnari         ###   ########.fr       */
+/*   Updated: 2017/05/14 19:13:27 by mnunnari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-intmax_t	getintarg(t_placeholder *ph, va_list ap)
+intmax_t		getintarg(t_placeholder *ph, va_list ap)
 {
-	if ( ph->type == 'D')
+	if (ph->type == 'D')
 		return (va_arg(ap, long));
 	if (ft_strchr(ph->length, 'j'))
 		return (va_arg(ap, intmax_t));
@@ -57,7 +57,7 @@ static void		ssign(t_placeholder *ph, char sign, char **str)
 	}
 }
 
-void		conv_d(t_placeholder *ph, va_list ap)
+void			conv_d(t_placeholder *ph, va_list ap)
 {
 	intmax_t		nbr;
 	char			sign;

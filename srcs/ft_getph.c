@@ -6,7 +6,7 @@
 /*   By: mnunnari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/07 15:43:28 by mnunnari          #+#    #+#             */
-/*   Updated: 2017/05/10 17:14:54 by mnunnari         ###   ########.fr       */
+/*   Updated: 2017/05/14 19:30:21 by mnunnari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@ void			get_parameter(const char **format, t_placeholder *ph)
 
 void			get_flags(const char **format, t_placeholder *ph)
 {
-	char	*g_flags = "#0-+ ";
+	char	*g_flags;
 
+	g_flags = "#0-+ ";
 	while (ft_strcont(g_flags, **format))
 	{
 		ph->flags = ft_strappend(ph->flags, **format);
@@ -44,7 +45,7 @@ void			get_precision(const char **format, t_placeholder *ph)
 	{
 		*format += 1;
 		ph->precision = 0;
-		while(ft_isdigit(**format))
+		while (ft_isdigit(**format))
 		{
 			ph->precision = ph->precision * 10 + (**format - '0');
 			*format += 1;
@@ -54,20 +55,12 @@ void			get_precision(const char **format, t_placeholder *ph)
 
 void			get_length(const char **format, t_placeholder *ph)
 {
-	char	*g_lengths = "hljz";
+	char	*g_lengths;
 
+	g_lengths = "hljz";
 	while (ft_strcont(g_lengths, **format))
 	{
 		ph->length = ft_strappend(ph->length, **format);
-		*format += 1;
-	}
-}
-
-void			get_type(const char **format, t_placeholder *ph)
-{
-	if (**format)
-	{
-		ph->type = **format;
 		*format += 1;
 	}
 }

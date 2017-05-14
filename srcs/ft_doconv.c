@@ -6,19 +6,11 @@
 /*   By: mnunnari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/07 15:43:44 by mnunnari          #+#    #+#             */
-/*   Updated: 2017/05/10 18:25:03 by mnunnari         ###   ########.fr       */
+/*   Updated: 2017/05/14 19:28:16 by mnunnari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-
-typedef void (*t_conv)(t_placeholder*, va_list);
-
-typedef struct		s_typeconv
-{
-	char			type;
-	t_conv			conv;
-}			t_typeconv;
 
 static t_typeconv	g_typeconvs[16] =
 {
@@ -39,10 +31,11 @@ static t_typeconv	g_typeconvs[16] =
 	{0, NULL}
 };
 
-t_conv		get_conv(char type)
+t_conv				get_conv(char type)
 {
-	int		i = 0;
+	int		i;
 
+	i = 0;
 	while (g_typeconvs[i].type)
 	{
 		if (g_typeconvs[i].type == type)
@@ -52,10 +45,10 @@ t_conv		get_conv(char type)
 	return (&conv_s);
 }
 
-void			do_conv(const char **format, va_list ap)
+void				do_conv(const char **format, va_list ap)
 {
 	t_placeholder	*ph;
-	t_conv		conv;
+	t_conv			conv;
 
 	*format += 1;
 	ph = createph(format);

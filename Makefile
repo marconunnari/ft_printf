@@ -25,6 +25,7 @@ SRCS= ft_printf.c \
 	ft_conv_wc.c \
 	ft_conv_pc.c \
 	ft_conv_uox.c \
+	ft_conv_ubase.c \
 	ft_wchar.c \
 
 LIBFTSRCS= ft_strlen.c \

@@ -6,7 +6,7 @@
 /*   By: mnunnari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/07 15:44:03 by mnunnari          #+#    #+#             */
-/*   Updated: 2017/05/07 16:33:31 by mnunnari         ###   ########.fr       */
+/*   Updated: 2017/05/14 19:31:00 by mnunnari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,13 @@ char				*fourbytes(wchar_t wchr)
 char				*wchartostr(wchar_t wchr)
 {
 	if (wchr < (MB_CUR_MAX == 1 ? 0xFF : 0x7F))
-		return onebyte(wchr);
+		return (onebyte(wchr));
 	else if (wchr < (1 << 11))
-		return twobytes(wchr);
+		return (twobytes(wchr));
 	else if (wchr < (1 << 16))
-		return threebytes(wchr);
+		return (threebytes(wchr));
 	else if (wchr < (1 << 21))
-		return fourbytes(wchr);
+		return (fourbytes(wchr));
 	else
 		return (NULL);
 }

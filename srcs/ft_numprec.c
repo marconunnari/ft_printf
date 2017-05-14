@@ -6,7 +6,7 @@
 /*   By: mnunnari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/10 18:19:15 by mnunnari          #+#    #+#             */
-/*   Updated: 2017/05/10 19:42:37 by mnunnari         ###   ########.fr       */
+/*   Updated: 2017/05/14 19:20:34 by mnunnari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	numprec(t_placeholder *ph, char **str, int is_zero)
 	char		*fix;
 	int			strlen;
 
-	if(ph->precision == 0 && is_zero
+	if (ph->precision == 0 && is_zero
 		&& !(ft_tolower(ph->type) == 'o' && ft_strcont(ph->flags, '#')))
 	{
 		REASSIGN(*str, ft_strdup(""));

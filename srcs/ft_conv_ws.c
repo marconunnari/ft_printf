@@ -6,7 +6,7 @@
 /*   By: mnunnari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/07 15:25:30 by mnunnari          #+#    #+#             */
-/*   Updated: 2017/05/10 19:14:05 by mnunnari         ###   ########.fr       */
+/*   Updated: 2017/05/14 19:19:44 by mnunnari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char					*wstrtostr(wchar_t *wstr)
 {
 	char		*str;
 	char		*tmp;
-	int		i;
+	int			i;
 
 	i = 0;
 	str = ft_strnew(0);
@@ -34,7 +34,7 @@ char					*wstrtostrprec(wchar_t *wstr, int len)
 {
 	char		*str;
 	char		*tmp;
-	int		i;
+	int			i;
 
 	i = 0;
 	str = ft_strnew(0);
@@ -51,7 +51,7 @@ char					*wstrtostrprec(wchar_t *wstr, int len)
 	return (str);
 }
 
-void		conv_ws(t_placeholder *ph, va_list ap)
+void					conv_ws(t_placeholder *ph, va_list ap)
 {
 	wchar_t		*wstr;
 	char		*str;
