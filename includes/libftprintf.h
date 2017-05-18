@@ -36,10 +36,10 @@ typedef struct	s_typeconv
 
 int				ft_printf(const char *restrict format, ...);
 
-void			ft_putchar_fd(char c, int fd);
-void			ft_putstr_fd(const char *str, int fd);
-void			ft_putwchar_fd(wchar_t wchr, int fd);
-void			ft_putwstr_fd(const wchar_t *wstr, int fd);
+void			ft_printf_putchar(char c);
+void			ft_printf_putstr(const char *str);
+void			ft_printf_putwchar(wchar_t wchr);
+void			ft_printf_putwstr(const wchar_t *wstr);
 
 void			do_print(const char *format, va_list ap);
 void			do_conv(const char **format, va_list ap);

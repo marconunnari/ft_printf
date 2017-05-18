@@ -14,29 +14,29 @@
 
 int		g_res;
 
-void			ft_putchar_fd(char c, int fd)
+void			ft_printf_putchar(char c)
 {
-	write(fd, &c, 1);
+	write(1, &c, 1);
 	g_res++;
 }
 
-void			ft_putstr_fd(const char *str, int fd)
+void			ft_printf_putstr(const char *str)
 {
 	while (*str)
-		ft_putchar_fd(*str++, fd);
+		ft_printf_putchar(*str++);
 }
 
-void			ft_putwchar_fd(wchar_t wchr, int fd)
+void			ft_printf_putwchar(wchar_t wchr)
 {
 	char	*str;
 
 	str = wchartostr(wchr);
-	ft_putstr_fd(str, fd);
+	ft_printf_putstr(str);
 	ft_strdel(&str);
 }
 
-void			ft_putwstr_fd(const wchar_t *wstr, int fd)
+void			ft_printf_putwstr(const wchar_t *wstr)
 {
 	while (*wstr)
-		ft_putstr_fd(wchartostr(*wstr++), fd);
+		ft_printf_putstr(wchartostr(*wstr++));
 }

@@ -72,6 +72,6 @@ void				conv_ubase(t_placeholder *ph, va_list ap, int base)
 	}
 	if (ft_isupper(ph->type))
 		ft_strtoupper(str);
-	ft_putstr_fd(str, 1);
+	ft_printf_putstr(str);
 	ft_strdel(&str);
 }

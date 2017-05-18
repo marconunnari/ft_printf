@@ -78,6 +78,6 @@ void			conv_d(t_placeholder *ph, va_list ap)
 		ssign(ph, sign, &str);
 		width(ph, &str);
 	}
-	ft_putstr_fd(str, 1);
+	ft_printf_putstr(str);
 	ft_strdel(&str);
 }

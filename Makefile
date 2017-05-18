@@ -30,6 +30,8 @@ SRCS= ft_printf.c \
 
 LIBFTSRCS= ft_strlen.c \
 	ft_strnew.c \
+	ft_putstr_fd.c \
+	ft_putchar_fd.c \
 	ft_strdel.c \
 	ft_strequ.c \
 	ft_strcmp.c \

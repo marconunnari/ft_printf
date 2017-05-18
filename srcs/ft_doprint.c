@@ -19,6 +19,6 @@ void			do_print(const char *format, va_list ap)
 		if (*format == '%')
 			do_conv(&format, ap);
 		else
-			ft_putchar_fd(*format++, 1);
+			ft_printf_putchar(*format++);
 	}
 }

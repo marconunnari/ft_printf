@@ -18,16 +18,16 @@ static void		cputwithwidth(t_placeholder *ph, char c)
 	char		chr;
 
 	if (ph->width < 1)
-		return (ft_putchar_fd(c, 1));
+		return (ft_printf_putchar(c));
 	ph->width--;
 	fix = ft_strnew(ph->width);
 	chr = ft_strcont(ph->flags, '0') && !ft_strcont(ph->flags, '-') ? '0' : ' ';
 	ft_memset(fix, chr, ph->width);
 	if (!ft_strcont(ph->flags, '-'))
-		ft_putstr_fd(fix, 1);
-	ft_putchar_fd(c, 1);
+		ft_printf_putstr(fix);
+	ft_printf_putchar(c);
 	if (ft_strcont(ph->flags, '-'))
-		ft_putstr_fd(fix, 1);
+		ft_printf_putstr(fix);
 	ft_strdel(&fix);
 }
 

@@ -18,5 +18,5 @@ void		conv_wc(t_placeholder *ph, va_list ap)
 
 	(void)ph;
 	wchr = va_arg(ap, wchar_t);
-	wchr == 0 ? ft_putchar_fd(0, 1) : ft_putwchar_fd(wchr, 1);
+	wchr == 0 ? ft_printf_putchar(0) : ft_printf_putwchar(wchr);
 }

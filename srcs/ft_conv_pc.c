@@ -16,5 +16,5 @@ void		conv_pc(t_placeholder *ph, va_list ap)
 {
 	(void)ph;
 	(void)ap;
-	ft_putchar_fd('%', 1);
+	ft_printf_putchar('%');
 }

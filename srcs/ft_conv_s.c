@@ -40,6 +40,6 @@ void		conv_s(t_placeholder *ph, va_list ap)
 	}
 	precision(ph, &str);
 	width(ph, &str);
-	ft_putstr_fd(str, 1);
+	ft_printf_putstr(str);
 	ft_strdel(&str);
 }
