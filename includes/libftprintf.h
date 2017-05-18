@@ -64,6 +64,7 @@ void			conv_ubase(t_placeholder *ph, va_list ap, int base);
 void			conv_u(t_placeholder *ph, va_list ap);
 void			conv_x(t_placeholder *ph, va_list ap);
 void			conv_o(t_placeholder *ph, va_list ap);
+void			conv_b(t_placeholder *ph, va_list ap);
 
 void			width(t_placeholder *ph, char **str);
 void			numprec(t_placeholder *ph, char **str, int is_zero);

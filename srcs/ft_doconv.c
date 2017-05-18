@@ -12,7 +12,7 @@
 
 #include "libftprintf.h"
 
-static t_typeconv	g_typeconvs[16] =
+static t_typeconv	g_typeconvs[17] =
 {
 	{'s', &conv_s},
 	{'S', &conv_ws},
@@ -28,6 +28,7 @@ static t_typeconv	g_typeconvs[16] =
 	{'X', &conv_x},
 	{'o', &conv_o},
 	{'O', &conv_o},
+	{'b', &conv_b},
 	{0, NULL}
 };
 
