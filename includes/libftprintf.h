@@ -44,13 +44,13 @@ void			ft_putwstr_fd(const wchar_t *wstr, int fd);
 void			do_print(const char *format, va_list ap);
 void			do_conv(const char **format, va_list ap);
 
-t_placeholder	*createph(const char **format);
+t_placeholder	*createph(const char **format, va_list ap);
 void			freeph(t_placeholder *ph);
 
 void			get_parameter(const char **format, t_placeholder *ph);
 void			get_flags(const char **format, t_placeholder *ph);
-void			get_width(const char **format, t_placeholder *ph);
-void			get_precision(const char **format, t_placeholder *ph);
+void			get_width(const char **format, t_placeholder *ph, va_list ap);
+void			get_precision(const char **format, t_placeholder *ph, va_list ap);
 void			get_length(const char **format, t_placeholder *ph);
 void			get_type(const char **format, t_placeholder *ph);
 

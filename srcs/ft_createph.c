@@ -42,7 +42,7 @@ void			get_type(const char **format, t_placeholder *ph)
 	}
 }
 
-t_placeholder	*createph(const char **format)
+t_placeholder	*createph(const char **format, va_list ap)
 {
 	t_placeholder	*ph;
 	int				i;
@@ -53,8 +53,8 @@ t_placeholder	*createph(const char **format)
 	while (i < 4)
 	{
 		get_flags(format, ph);
-		get_width(format, ph);
-		get_precision(format, ph);
+		get_width(format, ph, ap);
+		get_precision(format, ph, ap);
 		get_length(format, ph);
 		i++;
 	}
