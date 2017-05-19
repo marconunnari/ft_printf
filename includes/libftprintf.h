@@ -6,7 +6,7 @@
 /*   By: mnunnari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/24 16:46:32 by mnunnari          #+#    #+#             */
-/*   Updated: 2017/05/14 19:42:26 by mnunnari         ###   ########.fr       */
+/*   Updated: 2017/05/19 14:46:36 by mnunnari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ void			freeph(t_placeholder *ph);
 void			get_parameter(const char **format, t_placeholder *ph);
 void			get_flags(const char **format, t_placeholder *ph);
 void			get_width(const char **format, t_placeholder *ph, va_list ap);
-void			get_precision(const char **format, t_placeholder *ph, va_list ap);
+void			get_precision(const char **format, t_placeholder *ph,
+							va_list ap);
 void			get_length(const char **format, t_placeholder *ph);
 void			get_type(const char **format, t_placeholder *ph);
 

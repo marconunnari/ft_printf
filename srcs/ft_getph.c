@@ -6,7 +6,7 @@
 /*   By: mnunnari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/07 15:43:28 by mnunnari          #+#    #+#             */
-/*   Updated: 2017/05/14 19:30:21 by mnunnari         ###   ########.fr       */
+/*   Updated: 2017/05/19 14:45:16 by mnunnari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ void			get_width(const char **format, t_placeholder *ph, va_list ap)
 	}
 }
 
-void			get_precision(const char **format, t_placeholder *ph, va_list ap)
+void			get_precision(const char **format, t_placeholder *ph,
+								va_list ap)
 {
 	while (**format == '.')
 	{
