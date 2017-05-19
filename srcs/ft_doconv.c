@@ -6,7 +6,7 @@
 /*   By: mnunnari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/07 15:43:44 by mnunnari          #+#    #+#             */
-/*   Updated: 2017/05/14 19:28:16 by mnunnari         ###   ########.fr       */
+/*   Updated: 2017/05/19 14:54:02 by mnunnari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,11 @@ void				do_conv(const char **format, va_list ap)
 
 	*format += 1;
 	ph = createph(format, ap);
-	IFRETURN(!ph->type, freeph(ph));
+	if (!ph->type)
+		return (freeph(ph));
 	conv = get_conv(ph->type);
-	IFRETURNVOID(!conv);
+	if (!conv)
+		return ;
 	conv(ph, ap);
 	freeph(ph);
 }

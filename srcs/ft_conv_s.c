@@ -6,7 +6,7 @@
 /*   By: mnunnari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/07 15:42:54 by mnunnari          #+#    #+#             */
-/*   Updated: 2017/05/14 19:18:11 by mnunnari         ###   ########.fr       */
+/*   Updated: 2017/05/19 14:56:09 by mnunnari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,13 @@
 
 void		precision(t_placeholder *ph, char **str)
 {
+	char	*old;
+
 	if (ph->precision == -1 || ph->type != 's')
 		return ;
-	REASSIGN(*str, ft_strsub(*str, 0, ph->precision));
+	old = *str;
+	*str = ft_strsub(*str, 0, ph->precision);
+	free(old);
 }
 
 void		conv_s(t_placeholder *ph, va_list ap)

@@ -6,7 +6,7 @@
 /*   By: mnunnari <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/09 20:04:11 by mnunnari          #+#    #+#             */
-/*   Updated: 2017/05/14 19:29:05 by mnunnari         ###   ########.fr       */
+/*   Updated: 2017/05/19 14:58:12 by mnunnari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,10 @@ uintmax_t			getuintarg(t_placeholder *ph, va_list ap)
 
 static void			widthflag(t_placeholder *ph, uintmax_t u)
 {
-	IFRETURNVOID(u == 0 && !(ph->type == 'p'));
-	IFRETURNVOID(!(ft_strcont(ph->flags, '#') || ph->type == 'p'));
+	if (u == 0 && !(ph->type == 'p'))
+		return ;
+	if (!(ft_strcont(ph->flags, '#') || ph->type == 'p'))
+		return ;
 	if (ft_tolower(ph->type) == 'o')
 		ph->width--;
 	else if (ft_tolower(ph->type) == 'x' || ph->type == 'p')
@@ -42,12 +44,20 @@ static void			widthflag(t_placeholder *ph, uintmax_t u)
 
 static void			flag(t_placeholder *ph, uintmax_t u, char **str)
 {
-	IFRETURNVOID(u == 0 && !(ph->type == 'p'));
-	IFRETURNVOID(!(ft_strcont(ph->flags, '#') || ph->type == 'p'));
+	char	*old;
+
+	if (u == 0 && !(ph->type == 'p'))
+		return ;
+	if (!(ft_strcont(ph->flags, '#') || ph->type == 'p'))
+		return ;
 	if (ft_tolower(ph->type) == 'o')
 		*str = ft_strprepend('0', *str);
 	else if (ft_tolower(ph->type) == 'x' || ph->type == 'p')
-		REASSIGN(*str, ft_strjoin("0x", *str));
+	{
+		old = *str;
+		*str = ft_strjoin("0x", *str);
+		free(old);
+	}
 }
 
 void				conv_ubase(t_placeholder *ph, va_list ap, int base)
